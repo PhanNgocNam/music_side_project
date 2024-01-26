@@ -19,7 +19,7 @@ export default forwardRef<HTMLAudioElement>(function SeekBar({}, ref) {
         width: "calc(100% - 2px)",
         position: "absolute",
         transform: "translateY(50%)",
-        top: "-42%",
+        top: "-47%",
         left: "1px",
         right: "1px",
         "& .MuiSlider-track": {
@@ -43,7 +43,7 @@ export default forwardRef<HTMLAudioElement>(function SeekBar({}, ref) {
       size="small"
       valueLabelDisplay="on"
       valueLabelFormat={() => (
-        <h1>
+        <h1 className="text-[1rem]">
           {currentTime ? moment.utc(currentTime * 1000).format("mm:ss") : ""}
         </h1>
       )}

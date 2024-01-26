@@ -1,16 +1,27 @@
 import "swiper/css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Song from "../song/Song";
-import CustomeNavigation from "./CustomeNavigation";
+import CarouselHeader from "./header/CarouselHeader";
 import { CarouselTypes } from "../../types/CarouselTypes";
+import { useState } from "react";
 
 export default function Carousel({ id, playlists, title }: CarouselTypes) {
+  const [disableLeftArrow, setDisableLeftArrow] = useState(true);
+  const [disableRightArrow, setDisableRightArrow] = useState(false);
   return (
     <>
       <Swiper
-        className="w-[100%] pt-10 relative"
+        className="w-[100%] pt-16 relative"
         spaceBetween={50}
         slidesPerView={5}
+        onReachBeginning={() => {
+          setDisableLeftArrow(true);
+          setDisableRightArrow(false);
+        }}
+        onReachEnd={() => {
+          setDisableRightArrow(true);
+          setDisableLeftArrow(false);
+        }}
         breakpoints={{
           640: {
             slidesPerView: 2,
@@ -26,7 +37,11 @@ export default function Carousel({ id, playlists, title }: CarouselTypes) {
           },
         }}
       >
-        <CustomeNavigation />
+        <CarouselHeader
+          title={title}
+          disableLeftArrow={disableLeftArrow}
+          disableRightArrow={disableRightArrow}
+        />
         {playlists?.map((playlist) => (
           <SwiperSlide>
             <Song
@@ -40,9 +55,6 @@ export default function Carousel({ id, playlists, title }: CarouselTypes) {
             />
           </SwiperSlide>
         ))}
-        {/* <SwiperSlide>
-          <Song />
-        </SwiperSlide> */}
       </Swiper>
     </>
   );

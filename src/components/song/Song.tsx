@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
 import HeartIcon from "../../assets/icons/HeartIcon";
 import PlayIcon from "../../assets/icons/PlayIcon";
-import { PlaylistTypes } from "../../types/PlaylistType";
+import { PlaylistTypes } from "../../types/CarouselItemType";
 
 export default function Song({
   id,
@@ -16,7 +16,7 @@ export default function Song({
       p={2}
       bgcolor="#424242"
       borderRadius={1}
-      height="270px"
+      height="fit-content"
       width="100%"
       display="flex"
       justifyContent="space-between"
@@ -26,7 +26,7 @@ export default function Song({
     >
       <Box overflow="hidden" borderRadius={1} width={"fit-content"}>
         <img
-          className="min-w-[160px] object-contain pointer-events-none"
+          className="min-w-[160px] h-[160px] w-[160px] object-contain pointer-events-none"
           src={thumbnailM}
           alt=""
         />
@@ -39,6 +39,8 @@ export default function Song({
           justifyContent={"space-between"}
           color={"white"}
           fontSize={"14px"}
+          paddingTop=".6em"
+          paddingBottom=".6em"
         >
           <p>{title}</p>
           <HeartIcon height={2} width={2} />

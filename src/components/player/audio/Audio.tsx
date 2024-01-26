@@ -16,7 +16,7 @@ const Audio = React.forwardRef<HTMLAudioElement, {}>(({}, ref) => {
         }}
         ref={ref}
         onEnded={() => dispatch(triggerPauseOrPlay())}
-        src="https://a128-zmp3.zmdcdn.me/2ac106c140d99721bf1d8dde14bc97ac?authen=exp=1706258855~acl=/2ac106c140d99721bf1d8dde14bc97ac/*~hmac=1ef4e66cf418285ba5cc4e457c1ecc03"
+        src="https://a128-zmp3.zmdcdn.me/97751aea811287b6cd83ee7fa364d195?authen=exp=1706451017~acl=/97751aea811287b6cd83ee7fa364d195/*~hmac=0b533accc5c7e894b7a5a2fe7a2880a0"
       ></audio>
     </>
   );

@@ -1,6 +1,6 @@
 import { ArtistsTypes } from "./ArtistsType";
 
-export type PlaylistTypes = {
+export type CarouselItemTypes = {
   id: string;
   title: string;
   description: string;
