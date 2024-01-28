@@ -5,9 +5,20 @@ import CarouselHeader from "./header/CarouselHeader";
 import { CarouselTypes } from "../../types/CarouselTypes";
 import { useState } from "react";
 
-export default function Carousel({ id, playlists, title }: CarouselTypes) {
+export default function Carousel({ items, title }: CarouselTypes) {
   const [disableLeftArrow, setDisableLeftArrow] = useState(true);
   const [disableRightArrow, setDisableRightArrow] = useState(false);
+  const handleSlideChange = () => {
+    if (disableRightArrow !== true && disableLeftArrow !== false) {
+      setDisableRightArrow(false);
+      setDisableLeftArrow(false);
+    }
+
+    if (disableRightArrow !== false && disableLeftArrow !== true) {
+      setDisableRightArrow(false);
+      setDisableLeftArrow(false);
+    }
+  };
   return (
     <>
       <Swiper
@@ -18,6 +29,7 @@ export default function Carousel({ id, playlists, title }: CarouselTypes) {
           setDisableLeftArrow(true);
           setDisableRightArrow(false);
         }}
+        onSlideChange={() => handleSlideChange()}
         onReachEnd={() => {
           setDisableRightArrow(true);
           setDisableLeftArrow(false);
@@ -42,16 +54,16 @@ export default function Carousel({ id, playlists, title }: CarouselTypes) {
           disableLeftArrow={disableLeftArrow}
           disableRightArrow={disableRightArrow}
         />
-        {playlists?.map((playlist) => (
+        {items?.map((playlist) => (
           <SwiperSlide>
             <Song
-              id={playlist.id}
+              encodeId={playlist.encodeId}
               description={playlist.description}
               thumbnail={playlist.thumbnail}
               thumbnailM={playlist.thumbnailM}
               title={playlist.title}
               artists={playlist.artists}
-              key={playlist.id}
+              key={playlist.encodeId}
             />
           </SwiperSlide>
         ))}

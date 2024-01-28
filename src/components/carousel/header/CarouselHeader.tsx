@@ -7,7 +7,7 @@ export default function CustomeNavigation({
   disableLeftArrow,
   disableRightArrow,
 }: {
-  title: string;
+  title?: string;
   disableLeftArrow: boolean;
   disableRightArrow: boolean;
 }) {

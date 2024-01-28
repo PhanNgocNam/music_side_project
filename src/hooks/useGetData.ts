@@ -1,15 +1,18 @@
 import { useEffect, useState } from "react";
 import { get } from "../utils/get";
+import { ResponseDataTypes } from "../types/ResponseDataTypes";
 
-export default function useGetData(url: string) {
-  const [data, setData] = useState<any>([]);
+export default function useGetData<T>(url: string) {
+  const [data, setData] = useState<T | null>(null);
 
   useEffect(() => {
-    handleGetData(url).then((result) => {
-      if (data.length === 0) {
-        setData(result);
-      }
-    });
+    handleGetData(url)
+      .then((result: ResponseDataTypes<T>) => {
+        if (!data) {
+          setData(result.data.data);
+        }
+      })
+      .catch((err: Error) => console.log(err.message));
   }, []);
 
   async function handleGetData(url: string) {
@@ -17,5 +20,5 @@ export default function useGetData(url: string) {
     return data;
   }
 
-  return { data: data ? data : "Missing data..." };
+  return data;
 }

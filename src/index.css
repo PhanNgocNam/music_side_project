@@ -9,3 +9,30 @@ body {
   font-family: "Public Sans", sans-serif;
   font-size: 62.5%;
 }
+
+.one_line {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  /* line-height: 20px; */
+  word-spacing: normal;
+  /* letter-spacing: 0.3px; */
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.2);
+  /* display: none; */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

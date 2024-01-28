@@ -1,7 +1,7 @@
 import { ArtistsTypes } from "./ArtistsType";
 
 export type CarouselItemTypes = {
-  id: string;
+  encodeId: string;
   title: string;
   description: string;
   thumbnail: string;

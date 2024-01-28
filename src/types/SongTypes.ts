@@ -1,14 +1,14 @@
 import { ArtistsTypes } from "./ArtistsType";
 
 export type SongTypes = {
-  id: string;
+  encodeId: string;
   title: string;
   thumbnailM: string;
   thumbnail: string;
   duration: number;
   releaseAt: number;
   hasLyric: boolean;
-  artisrs: ArtistsTypes[];
+  artists?: ArtistsTypes[];
   related?: {
     id: string;
     title: string;

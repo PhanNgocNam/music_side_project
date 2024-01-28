@@ -1,10 +1,11 @@
 import Carousel from "../components/carousel/Carousel";
 import { urls } from "../constant/requestURL";
 import useGetData from "../hooks/useGetData";
+import { HomePageDataTypes } from "../types/HomaPageDataTypes";
 
 export default function Home() {
-  const { data } = useGetData(urls.home);
-  console.log(data.data?.data?.items[4]);
+  const data = useGetData<HomePageDataTypes>(urls.home);
+  // console.log(data?.items[5]);
 
   return (
     <div
@@ -14,10 +15,9 @@ export default function Home() {
       className="w-[940px]"
     >
       <Carousel
-        id={data.data?.data?.items[4].sectionId}
-        key={data.data?.data?.items[4].sectionId}
-        title={data.data?.data?.items[4].title}
-        playlists={data.data?.data?.items[4].items}
+        key={data?.items[5].title}
+        title={data?.items[5].title}
+        items={data?.items[5].items}
       />
     </div>
   );

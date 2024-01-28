@@ -1,16 +1,22 @@
 import Box from "@mui/material/Box";
 import HeartIcon from "../../assets/icons/HeartIcon";
 import PlayIcon from "../../assets/icons/PlayIcon";
-import { PlaylistTypes } from "../../types/CarouselItemType";
+import { CarouselItemTypes } from "../../types/CarouselItemType";
+import { ArtistsTypes } from "../../types/ArtistsType";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Song({
-  id,
+  encodeId,
   title,
   description,
   thumbnail,
   thumbnailM,
   artists,
-}: PlaylistTypes) {
+}: CarouselItemTypes) {
+  const navigate = useNavigate();
+
+  console.log(artists);
+
   return (
     <Box
       p={2}
@@ -38,15 +44,22 @@ export default function Song({
           display={"flex"}
           justifyContent={"space-between"}
           color={"white"}
-          fontSize={"14px"}
+          fontSize={"1.4rem"}
           paddingTop=".6em"
           paddingBottom=".6em"
         >
-          <p>{title}</p>
+          <p className="text-[1.4rem]">{title}</p>
           <HeartIcon height={2} width={2} />
         </Box>
-        <p className="text-white text-[10px]">
-          {artists.map((artist) => artist.name).join(", ")}{" "}
+        <p className="text-white/80 text-[1.1rem] min-h-[30px]">
+          {artists?.map((artist: ArtistsTypes) => (
+            <Link
+              to={artist.name}
+              className="group hover:underline hover:text-blue-300"
+            >
+              {artist.name} <span className="group-last:hidden">{", "}</span>
+            </Link>
+          ))}
         </p>
       </Box>
 
@@ -62,7 +75,10 @@ export default function Song({
         width={"160px"}
       >
         <p></p>
-        <button className="h-[30px] w-[30px] bg-white rounded-full relative">
+        <button
+          onClick={() => navigate(`/Nam/list?id=${encodeId}`)}
+          className="h-[30px] w-[30px] bg-white rounded-full relative hover:scale-[1.2]"
+        >
           <PlayIcon
             width={1.8}
             height={1.8}
