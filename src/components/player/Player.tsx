@@ -3,6 +3,7 @@ import Audio from "./audio/Audio";
 import MainPlayer from "./main_player/MainPlayer";
 import SeekBar from "./seek_bar/SeekBar";
 import Right from "./right/Right";
+import Left from "./left/Left";
 
 export default function Player() {
   const ref = useRef<HTMLAudioElement | null>(null);
@@ -11,7 +12,8 @@ export default function Player() {
       <Audio ref={ref} />
       <SeekBar ref={ref} />
       <div className="w-full flex justify-between ">
-        <div className="min-w-60 w-[240px]">left</div>
+        {/* <div className="min-w-60 w-[240px]">left</div> */}
+        <Left />
         <MainPlayer ref={ref} />
         <Right />
       </div>

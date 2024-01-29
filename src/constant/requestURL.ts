@@ -4,4 +4,6 @@ export const urls = {
   home: rootUrl + "/get/home",
   playlistPage: rootUrl + "/get/playlist/info",
   sound: rootUrl + "/get/song/sound",
+  artist: rootUrl + "/get/artist" /** get/artist?id=Tue-Phuong */,
+  songInfo: rootUrl + "/get/song/info" /* get/song/info?id=Z6D6009U */,
 };

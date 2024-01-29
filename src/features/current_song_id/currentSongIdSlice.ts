@@ -1,30 +1,30 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import type { RootState } from "../../app/store";
 
-type CurrentSongUrlType = {
-  url: string;
+type CurrentSongIdType = {
+  currentSongId: string;
 };
 
-const initialState: CurrentSongUrlType = {
-  url: "",
+const initialState: CurrentSongIdType = {
+  currentSongId: "",
 };
 
-const currentSongUrlSlice = createSlice({
-  name: "current_song_url",
+const currentSongIdSlice = createSlice({
+  name: "current_song_id",
   // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   reducers: {
     // Use the PayloadAction type to declare the contents of `action.payload`
-    setCurrentSongUrl: (state, action: PayloadAction<string>) => {
-      state.url = action.payload;
+    setCurrentSongId: (state, action: PayloadAction<string>) => {
+      state.currentSongId = action.payload;
     },
   },
 });
 
-export const { setCurrentSongUrl } = currentSongUrlSlice.actions;
+export const { setCurrentSongId } = currentSongIdSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
 // export const selectDuration = (state: RootState) =>
 //   state.currentTime.currentTime;
 
-export default currentSongUrlSlice.reducer;
+export default currentSongIdSlice.reducer;

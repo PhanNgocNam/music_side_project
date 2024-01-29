@@ -7,6 +7,8 @@ import { urls } from "../../../constant/requestURL";
 import { get } from "../../../utils/get";
 import { useAppDispatch } from "../../../hooks/useAppDispatch";
 import { setCurrentSongUrl } from "../../../features/current_song_url/currentSongUrlSlide";
+import { setCurrentSongId } from "../../../features/current_song_id/currentSongIdSlice";
+import { setDuration } from "../../../features/duration/durationSlice";
 
 export default function SongHorizontalDisplay({
   encodeId,
@@ -20,8 +22,9 @@ export default function SongHorizontalDisplay({
 }: SongTypes) {
   const dispatch = useAppDispatch();
   const handlePlayNewSong = () => {
+    dispatch(setDuration(duration));
     get(`${urls.sound}?id=${encodeId}`).then((result) => {
-      // console.log(result.data?.data?.data?.[128]);
+      dispatch(setCurrentSongId(encodeId));
       dispatch(setCurrentSongUrl(result.data?.data?.data?.[128]));
     });
   };
