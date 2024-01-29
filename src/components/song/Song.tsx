@@ -15,8 +15,6 @@ export default function Song({
 }: CarouselItemTypes) {
   const navigate = useNavigate();
 
-  console.log(artists);
-
   return (
     <Box
       p={2}

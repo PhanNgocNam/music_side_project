@@ -1,8 +1,14 @@
 import { IconType } from "../../types/IconType";
 
-export default function PlayIcon({ width, height, fill, classname }: IconType) {
+export default function PlayIcon({
+  width,
+  height,
+  fill,
+  classname,
+  onClick,
+}: IconType) {
   return (
-    <div className="flex justify-center items-center">
+    <div onClick={onClick} className="flex justify-center items-center">
       <svg
         className={classname}
         width={`${width * 8}px`}

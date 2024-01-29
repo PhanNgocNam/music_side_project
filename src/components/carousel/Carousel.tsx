@@ -1,4 +1,3 @@
-import "swiper/css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Song from "../song/Song";
 import CarouselHeader from "./header/CarouselHeader";

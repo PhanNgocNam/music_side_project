@@ -9,11 +9,4 @@ export type SongTypes = {
   releaseAt: number;
   hasLyric: boolean;
   artists?: ArtistsTypes[];
-  related?: {
-    id: string;
-    title: string;
-    thumbnail: string;
-    releasedAt: number;
-    artists: ArtistsTypes[];
-  };
 };
