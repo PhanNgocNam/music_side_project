@@ -2,7 +2,7 @@ import { ArtistsTypes } from "./ArtistsType";
 import { SongTypes } from "./SongTypes";
 
 export type PlaylistTypes = {
-  id: string;
+  encodeId: string;
   title: string;
   thumbnail?: string;
   thumbnailM?: string;

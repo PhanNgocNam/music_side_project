@@ -12,10 +12,9 @@ export default function Player() {
       <Audio ref={ref} />
       <SeekBar ref={ref} />
       <div className="w-full flex justify-between ">
-        {/* <div className="min-w-60 w-[240px]">left</div> */}
         <Left />
         <MainPlayer ref={ref} />
-        <Right />
+        <Right ref={ref} />
       </div>
     </div>
   );

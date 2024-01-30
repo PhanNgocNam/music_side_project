@@ -5,7 +5,7 @@ import { HomePageDataTypes } from "../types/HomaPageDataTypes";
 
 export default function Home() {
   const data = useGetData<HomePageDataTypes>(urls.home);
-  // console.log(data?.items[5]);
+  console.log(data?.items[5]);
 
   return (
     <div

@@ -9,6 +9,10 @@ import PrevIcon from "../../../assets/icons/PrevIcon";
 import NextIcon from "../../../assets/icons/NextIcon";
 import LoopIcon from "../../../assets/icons/LoopIcon";
 import { setDuration } from "../../../features/duration/durationSlice";
+import { urls } from "../../../constant/requestURL";
+import { get } from "../../../utils/get";
+import { setCurrentSongId } from "../../../features/current_song_id/currentSongIdSlice";
+import { setCurrentSongUrl } from "../../../features/current_song_url/currentSongUrlSlide";
 
 export default React.forwardRef<HTMLAudioElement>(function MainPlayer({}, ref) {
   const [audioStatus, setAudioStatus] = useState("unknown");
@@ -16,6 +20,8 @@ export default React.forwardRef<HTMLAudioElement>(function MainPlayer({}, ref) {
 
   const dispatch = useAppDispatch();
   const { isPlaying } = useAppSelector((state) => state.playing);
+  const { currentSongId } = useAppSelector((state) => state.currentSongId);
+  const { list } = useAppSelector((state) => state.currentPlaylist);
 
   useEffect(() => {
     if (ref && "current" in ref && ref.current && isPlaying) {
@@ -33,6 +39,37 @@ export default React.forwardRef<HTMLAudioElement>(function MainPlayer({}, ref) {
     }
   }, [audioContext]);
 
+  async function handleNextSong(isShuffleMode: boolean) {
+    let index = list.findIndex((song) => song.encodeId === currentSongId);
+    let songIndexPosition;
+    if (!isShuffleMode) {
+      songIndexPosition = index !== -1 && index + 1;
+    } else {
+      songIndexPosition =
+        index !== 1 && Math.floor(Math.random() * (list.length + 1));
+    }
+    if (songIndexPosition && songIndexPosition < list.length) {
+      dispatch(setDuration(list[songIndexPosition].duration));
+      get(`${urls.sound}?id=${list[songIndexPosition].encodeId}`).then(
+        (result) => {
+          dispatch(setCurrentSongId(list[songIndexPosition].encodeId));
+          dispatch(setCurrentSongUrl(result.data?.data?.data?.[128]));
+        }
+      );
+    }
+  }
+
+  async function handlePrevSong() {
+    let index = list.findIndex((song) => song.encodeId === currentSongId);
+    if (index) {
+      dispatch(setDuration(list[index - 1].duration));
+      get(`${urls.sound}?id=${list[index - 1].encodeId}`).then((result) => {
+        dispatch(setCurrentSongId(list[index - 1].encodeId));
+        dispatch(setCurrentSongUrl(result.data?.data?.data?.[128]));
+      });
+    }
+  }
+
   return (
     <div className="flex justify-center items-center relative">
       <div className="flex justify-between items-center min-w-[196px]">
@@ -40,7 +77,7 @@ export default React.forwardRef<HTMLAudioElement>(function MainPlayer({}, ref) {
           <ShuffleIcon width={1.8} height={1.8} classname="cursor-pointer" />
         </button>
 
-        <button className="hover:opacity-60">
+        <button onClick={() => handlePrevSong()} className="hover:opacity-60">
           <PrevIcon
             width={1.8}
             height={1.8}
@@ -67,7 +104,10 @@ export default React.forwardRef<HTMLAudioElement>(function MainPlayer({}, ref) {
           </button>
         </button>
 
-        <button className="hover:opacity-60">
+        <button
+          onClick={() => handleNextSong(true)}
+          className="hover:opacity-60"
+        >
           <NextIcon
             width={1.8}
             height={1.8}

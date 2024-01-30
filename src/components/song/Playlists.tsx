@@ -1,11 +1,14 @@
 import Box from "@mui/material/Box";
 import HeartIcon from "../../assets/icons/HeartIcon";
 import PlayIcon from "../../assets/icons/PlayIcon";
-import { CarouselItemTypes } from "../../types/CarouselItemType";
 import { ArtistsTypes } from "../../types/ArtistsType";
 import { Link, useNavigate } from "react-router-dom";
+import { PlaylistTypes } from "../../types/PlaylistTypes";
+import { useAppDispatch } from "../../hooks/useAppDispatch";
+import { setCurrentPlaylist } from "../../features/current_playlist/currentPlaylistSlice";
+import { CarouselItemTypes } from "../../types/CarouselItemType";
 
-export default function Song({
+export default function Playlists({
   encodeId,
   title,
   description,
@@ -14,6 +17,9 @@ export default function Song({
   artists,
 }: CarouselItemTypes) {
   const navigate = useNavigate();
+  // const dispatch = useAppDispatch();
+
+  // console.log(songs);
 
   return (
     <Box
@@ -74,7 +80,10 @@ export default function Song({
       >
         <p></p>
         <button
-          onClick={() => navigate(`/Nam/list?id=${encodeId}`)}
+          onClick={() => {
+            navigate(`/Nam/list?id=${encodeId}`);
+            // dispatch(setCurrentPlaylist(songs));
+          }}
           className="h-[30px] w-[30px] bg-white rounded-full relative hover:scale-[1.2]"
         >
           <PlayIcon

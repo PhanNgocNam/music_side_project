@@ -1,5 +1,5 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import Song from "../song/Song";
+import Playlists from "../song/Playlists";
 import CarouselHeader from "./header/CarouselHeader";
 import { CarouselTypes } from "../../types/CarouselTypes";
 import { useState } from "react";
@@ -55,14 +55,14 @@ export default function Carousel({ items, title }: CarouselTypes) {
         />
         {items?.map((playlist) => (
           <SwiperSlide>
-            <Song
+            <Playlists
+              key={playlist.encodeId}
               encodeId={playlist.encodeId}
               description={playlist.description}
               thumbnail={playlist.thumbnail}
               thumbnailM={playlist.thumbnailM}
               title={playlist.title}
               artists={playlist.artists}
-              key={playlist.encodeId}
             />
           </SwiperSlide>
         ))}

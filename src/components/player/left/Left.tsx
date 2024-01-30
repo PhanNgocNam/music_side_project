@@ -26,11 +26,11 @@ export default function Left() {
         style={{
           height: "40px",
           width: "40px",
-          backgroundImage: `url(${leftData?.data.data.thumbnail})`,
+          backgroundImage: `url(${leftData?.data.data.thumbnailM})`,
         }}
-        className="bg-no-repeat bg-center bg-contain rounded-md"
-      ></div>
-      <div className="text-[1.2rem] text-white/80">
+        className="bg-no-repeat bg-cover rounded-md object-cover"
+      />
+      <div className="text-[1.2rem] text-white/80 flex-1">
         <p className=" one_line">{leftData?.data.data.title}</p>
         <p className="text-[1rem] one_line">
           {leftData?.data.data.artistsNames}

@@ -7,13 +7,25 @@ import useGetData from "../hooks/useGetData";
 import { PlaylistDetailTypes } from "../types/PlaylistDetailsTypes";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SlidesNavigates from "../components/slides_navigate/SlidesNavigates";
+import { useEffect } from "react";
+import { useAppDispatch } from "../hooks/useAppDispatch";
+import { setCurrentPlaylist } from "../features/current_playlist/currentPlaylistSlice";
+import { useAppSelector } from "../hooks/useAppSelector";
 
 export default function PlaylistDetails() {
   const [searchParams] = useSearchParams();
+  const dispatch = useAppDispatch();
+  const { list } = useAppSelector((state) => state.currentPlaylist);
 
   const data = useGetData<PlaylistDetailTypes>(
     `${urls.playlistPage}?id=${searchParams.get("id")}`
   );
+
+  useEffect(() => {
+    if (data?.song.items) {
+      dispatch(setCurrentPlaylist(data?.song.items));
+    }
+  }, [data]);
 
   return (
     <div
@@ -27,10 +39,10 @@ export default function PlaylistDetails() {
           style={{
             backgroundImage: `url(${data?.thumbnailM})`,
           }}
-          className="w-[280px] h-[280px] bg-black bg-contain rounded-md  bg-no-repeat shadow-2xl"
+          className="w-[280px] h-[280px] bg-contain rounded-md  bg-no-repeat shadow-2xl"
         />
 
-        <div className="bg-[#4285F4] w-[280px] flex flex-col items-center rounded-bl-md rounded-br-md shadow-2xl">
+        <div className="bg-[#4285F4] w-[280px] flex flex-col text-center items-center rounded-bl-md rounded-br-md shadow-2xl">
           <p className="font-bold text-[1.6rem] pt-2 text-white">
             {data?.title}
           </p>
@@ -76,8 +88,9 @@ export default function PlaylistDetails() {
             />
 
             <SwiperSlide>
-              {data?.song.items?.map((song) => (
+              {list.map((song, index) => (
                 <SongHorizontalDisplay
+                  key={index}
                   encodeId={song.encodeId}
                   duration={song.duration}
                   hasLyric={song.hasLyric}

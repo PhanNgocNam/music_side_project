@@ -4,6 +4,7 @@ import durationSlice from "../features/duration/durationSlice";
 import currentTimeSlice from "../features/current_time/currentTimeSlice";
 import currentSongUrlSlice from "../features/current_song_url/currentSongUrlSlide";
 import currentSongIdSlice from "../features/current_song_id/currentSongIdSlice";
+import currentPlaylistSlice from "../features/current_playlist/currentPlaylistSlice";
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     currentTime: currentTimeSlice,
     currentSongUrl: currentSongUrlSlice,
     currentSongId: currentSongIdSlice,
+    currentPlaylist: currentPlaylistSlice,
   },
 });
 

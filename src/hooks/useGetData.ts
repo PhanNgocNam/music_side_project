@@ -19,7 +19,6 @@ export default function useGetData<T, V = []>(url: string, dependencies?: V[]) {
     const { data } = await get(url);
     return data;
   }
-  console.log(data);
 
   return data;
 }
