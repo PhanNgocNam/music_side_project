@@ -42,7 +42,7 @@ export default forwardRef<HTMLAudioElement>(function SeekBar({}, ref) {
         },
       }}
       size="small"
-      valueLabelDisplay="on"
+      valueLabelDisplay="auto"
       valueLabelFormat={() => (
         <h1 className="text-[1rem]">
           {currentTime ? moment.utc(currentTime * 1000).format("mm:ss") : ""}
@@ -51,6 +51,7 @@ export default forwardRef<HTMLAudioElement>(function SeekBar({}, ref) {
       defaultValue={0}
       value={percentPlayed}
       onChange={(event, newValue) => {
+        event.stopPropagation();
         if (ref && "current" in ref && ref.current) {
           setPercentPlayed(newValue as number);
           ref.current.currentTime = (duration * Number(newValue)) / 100;

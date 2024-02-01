@@ -5,7 +5,7 @@ import { HomePageDataTypes } from "../types/HomaPageDataTypes";
 
 export default function Home() {
   const data = useGetData<HomePageDataTypes>(urls.home);
-  console.log(data?.items[5]);
+  // console.log(data?.items[5]);
 
   return (
     <div
@@ -15,6 +15,7 @@ export default function Home() {
       className="w-[940px]"
     >
       <Carousel
+        slidesPerView={5}
         key={data?.items[5].title}
         title={data?.items[5].title}
         items={data?.items[5].items}

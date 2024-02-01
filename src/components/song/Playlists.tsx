@@ -17,9 +17,6 @@ export default function Playlists({
   artists,
 }: CarouselItemTypes) {
   const navigate = useNavigate();
-  // const dispatch = useAppDispatch();
-
-  // console.log(songs);
 
   return (
     <Box
@@ -52,13 +49,13 @@ export default function Playlists({
           paddingTop=".6em"
           paddingBottom=".6em"
         >
-          <p className="text-[1.4rem]">{title}</p>
+          <p className="text-[1.4rem] one_line">{title}</p>
           <HeartIcon height={2} width={2} />
         </Box>
         <p className="text-white/80 text-[1.1rem] min-h-[30px]">
           {artists?.map((artist: ArtistsTypes) => (
             <Link
-              to={artist.name}
+              to={`/vi/artists?id=${artist.alias}`}
               className="group hover:underline hover:text-blue-300"
             >
               {artist.name} <span className="group-last:hidden">{", "}</span>
@@ -81,8 +78,7 @@ export default function Playlists({
         <p></p>
         <button
           onClick={() => {
-            navigate(`/Nam/list?id=${encodeId}`);
-            // dispatch(setCurrentPlaylist(songs));
+            navigate(`/vi/list?id=${encodeId}`);
           }}
           className="h-[30px] w-[30px] bg-white rounded-full relative hover:scale-[1.2]"
         >

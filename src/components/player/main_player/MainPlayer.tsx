@@ -77,7 +77,13 @@ export default React.forwardRef<HTMLAudioElement>(function MainPlayer({}, ref) {
           <ShuffleIcon width={1.8} height={1.8} classname="cursor-pointer" />
         </button>
 
-        <button onClick={() => handlePrevSong()} className="hover:opacity-60">
+        <button
+          onClick={(event) => {
+            event.stopPropagation();
+            handlePrevSong();
+          }}
+          className="hover:opacity-60"
+        >
           <PrevIcon
             width={1.8}
             height={1.8}
@@ -89,7 +95,10 @@ export default React.forwardRef<HTMLAudioElement>(function MainPlayer({}, ref) {
         <button className="hover:opacity-60">
           <button
             className="w-[36px] h-[36px] rounded-full border border-white/20 flex justify-center items-center relative"
-            onClick={() => dispatch(triggerPauseOrPlay())}
+            onClick={(event) => {
+              event.stopPropagation();
+              dispatch(triggerPauseOrPlay());
+            }}
           >
             {isPlaying ? (
               <PauseIcon width={2.2} height={2.2} />
@@ -105,7 +114,10 @@ export default React.forwardRef<HTMLAudioElement>(function MainPlayer({}, ref) {
         </button>
 
         <button
-          onClick={() => handleNextSong(true)}
+          onClick={(event) => {
+            event.stopPropagation();
+            handleNextSong(true);
+          }}
           className="hover:opacity-60"
         >
           <NextIcon

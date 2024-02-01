@@ -33,11 +33,6 @@ export default function SongHorizontalDisplay({
       <div className="w-[50%] h-full flex justify-between items-center z-[101]">
         <div className="flex items-center gap-4 justify-start">
           <div className="relative m-h-[48px] m-w-[48px] flex justify-center items-center">
-            {/* <img
-              className="h-[40px] w-[40px] rounded-md object-cover bg-slate-400"
-              src={`${thumbnail}`}
-              alt={thumbnail}
-            /> */}
             <div
               style={{
                 backgroundImage: `url(${thumbnail})`,

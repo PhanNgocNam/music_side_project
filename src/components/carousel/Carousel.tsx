@@ -2,11 +2,22 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import Playlists from "../song/Playlists";
 import CarouselHeader from "./header/CarouselHeader";
 import { CarouselTypes } from "../../types/CarouselTypes";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export default function Carousel({ items, title }: CarouselTypes) {
-  const [disableLeftArrow, setDisableLeftArrow] = useState(true);
-  const [disableRightArrow, setDisableRightArrow] = useState(false);
+export default function Carousel({
+  items,
+  title,
+  slidesPerView,
+  className,
+  hdClassName,
+}: CarouselTypes) {
+  const [disableLeftArrow, setDisableLeftArrow] = useState(false);
+  const [disableRightArrow, setDisableRightArrow] = useState(true);
+
+  useEffect(() => {
+    setDisableLeftArrow(false);
+    setDisableRightArrow(true);
+  }, []);
   const handleSlideChange = () => {
     if (disableRightArrow !== true && disableLeftArrow !== false) {
       setDisableRightArrow(false);
@@ -21,34 +32,31 @@ export default function Carousel({ items, title }: CarouselTypes) {
   return (
     <>
       <Swiper
-        className="w-[100%] pt-16 relative"
-        spaceBetween={50}
-        slidesPerView={5}
+        className={`w-[100%] pt-16 relative ${className}`}
+        slidesPerView={slidesPerView}
+        spaceBetween={10}
         onReachBeginning={() => {
-          setDisableLeftArrow(true);
-          setDisableRightArrow(false);
+          setDisableLeftArrow(false);
+          setDisableRightArrow(true);
         }}
         onSlideChange={() => handleSlideChange()}
         onReachEnd={() => {
-          setDisableRightArrow(true);
-          setDisableLeftArrow(false);
+          setDisableRightArrow(false);
+          setDisableLeftArrow(true);
         }}
-        breakpoints={{
-          640: {
-            slidesPerView: 2,
-            spaceBetween: 20,
-          },
-          768: {
-            slidesPerView: 3,
-            spaceBetween: 40,
-          },
-          1024: {
-            slidesPerView: 5,
-            spaceBetween: 10,
-          },
-        }}
+        // breakpoints={{
+        //   640: {
+        //     slidesPerView: 3,
+        //     spaceBetween: 10,
+        //   },
+        //   1024: {
+        //     slidesPerView: 5,
+        //     spaceBetween: 10,
+        //   },
+        // }}
       >
         <CarouselHeader
+          className={hdClassName}
           title={title}
           disableLeftArrow={disableLeftArrow}
           disableRightArrow={disableRightArrow}

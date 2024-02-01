@@ -6,4 +6,6 @@ export type ArtistsTypes = {
   thumbnailM?: string;
   totalFollow?: string;
   cover?: string;
+  link?: string;
+  alias?: string;
 };
