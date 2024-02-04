@@ -3,9 +3,19 @@ import MutedIcon from "../../../assets/icons/MutedIcon";
 import VolumeIcon from "../../../assets/icons/VolumeIcon";
 import { GiMicrophone } from "react-icons/gi";
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { useAppSelector } from "../../../hooks/useAppSelector";
+
 export default React.forwardRef<HTMLAudioElement>(function Right({}, ref) {
+  const navigate = useNavigate();
+  const { current_playlist_id } = useAppSelector(
+    (state) => state.currentPlaylistId
+  );
   return (
-    <div className="min-w-60 w-[240px] flex items-center justify-between">
+    <div
+      onClick={() => navigate(`/vi/list/?id=${current_playlist_id}`)}
+      className="min-w-60 w-[240px] flex flex-1 gap-1 items-center justify-end"
+    >
       <button className="text-[#BBBBBB]  border w-[32px] h-[32px] flex justify-center items-center border-white/20 rounded-sm hover:bg-white/20">
         <GiMicrophone size={16} />
       </button>
@@ -14,7 +24,7 @@ export default React.forwardRef<HTMLAudioElement>(function Right({}, ref) {
         size="small"
         valueLabelDisplay="auto"
         sx={{
-          maxWidth: "60%",
+          maxWidth: "40%",
           "& .MuiSlider-track": {
             background: "#D9D9D9",
           },
@@ -32,6 +42,7 @@ export default React.forwardRef<HTMLAudioElement>(function Right({}, ref) {
         }}
         defaultValue={50}
         onChange={(e, value) => {
+          e.stopPropagation();
           if (ref && "current" in ref && ref.current) {
             ref.current.volume = Number(value) * 0.01;
           }

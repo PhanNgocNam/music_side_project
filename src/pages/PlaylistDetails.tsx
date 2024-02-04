@@ -3,28 +3,48 @@ import PlayIcon from "../assets/icons/PlayIcon";
 import moment from "moment";
 import SongHorizontalDisplay from "../components/song/song_horizontal_display/SongHorizontalDisplay";
 import { urls } from "../constant/requestURL";
-import useGetData from "../hooks/useGetData";
 import { PlaylistDetailTypes } from "../types/PlaylistDetailsTypes";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SlidesNavigates from "../components/slides_navigate/SlidesNavigates";
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useAppDispatch } from "../hooks/useAppDispatch";
-import { setCurrentPlaylist } from "../features/current_playlist/currentPlaylistSlice";
+import { setCurrentPlaylistReference } from "../features/current_playlist/currentPlaylistSlice";
 import { useAppSelector } from "../hooks/useAppSelector";
+import { get } from "../utils/get";
+import { ResponseDataTypes } from "../types/ResponseDataTypes";
+import wave from "../assets/images/wave.gif";
+import { BiCurrentLocation } from "react-icons/bi";
+import { useInView } from "react-intersection-observer";
 
 export default function PlaylistDetails() {
   const [searchParams] = useSearchParams();
   const dispatch = useAppDispatch();
-  const { list } = useAppSelector((state) => state.currentPlaylist);
-
-  const data = useGetData<PlaylistDetailTypes>(
-    `${urls.playlistPage}?id=${searchParams.get("id")}`
+  const { currentPlaylistReference } = useAppSelector(
+    (state) => state.currentPlaylist
   );
+  const { isPlaying } = useAppSelector((state) => state.playing);
+  const { ready } = useAppSelector((state) => state.canPlay);
+  const { currentSongId } = useAppSelector((state) => state.currentSongId);
+  const { current_playlist_id } = useAppSelector(
+    (state) => state.currentPlaylistId
+  );
+  const swiperRef = useRef<HTMLDivElement | null>(null);
+  const { ref, inView, entry } = useInView();
+  const [data, setData] = useState<ResponseDataTypes<PlaylistDetailTypes>>();
 
   useEffect(() => {
-    if (data?.song.items) {
-      dispatch(setCurrentPlaylist(data?.song.items));
-    }
+    (async () => {
+      const { data } = await get(
+        `${urls.playlistPage}?id=${searchParams.get("id")}`
+      );
+      if (data) {
+        setData(data);
+      }
+    })();
+  }, [location.href]);
+
+  useEffect(() => {
+    if (data) dispatch(setCurrentPlaylistReference(data.data.data.song.items));
   }, [data]);
 
   return (
@@ -37,24 +57,41 @@ export default function PlaylistDetails() {
       <div className="h-full w-[38%] flex flex-col items-center z-[101] justify-start text-white/50">
         <div
           style={{
-            backgroundImage: `url(${data?.thumbnailM})`,
+            backgroundImage: `url(${data?.data?.data.thumbnailM})`,
           }}
           className="w-[280px] h-[280px] bg-contain rounded-md  bg-no-repeat shadow-2xl"
-        />
+        >
+          {isPlaying ? (
+            <div className="flex justify-center items-center h-full w-full bg-black/30">
+              {ready ? (
+                <div className="flex justify-center items-center p-10 w-[80px] h-[80px] rounded-full border border-white/60">
+                  <img src={wave} />
+                </div>
+              ) : (
+                ""
+              )}
+            </div>
+          ) : (
+            ""
+          )}
+        </div>
 
         <div className="bg-[#4285F4] w-[280px] flex flex-col text-center items-center rounded-bl-md rounded-br-md shadow-2xl">
           <p className="font-bold text-[1.6rem] pt-2 text-white">
-            {data?.title}
+            {data?.data?.data.title}
           </p>
-          <p className="text-[1.2rem] pt-2">{data?.song.total} Bài hát</p>
+          <p className="text-[1.2rem] pt-2">
+            {data?.data.data.song.total} Bài hát
+          </p>
           <p className="text-[1.2rem] pt-2">
             Cập nhật:{" "}
             {moment(
-              data?.contentLastUpdate && data?.contentLastUpdate * 1000
+              data?.data.data.contentLastUpdate &&
+                data?.data.data.contentLastUpdate * 1000
             ).format("DD/MM/yy")}
           </p>
           <p className="text-[1.2rem] pt-2">
-            {data?.artists.map((artist) => (
+            {data?.data.data.artists.map((artist) => (
               <Link
                 key={artist.id}
                 to={artist.name}
@@ -72,6 +109,22 @@ export default function PlaylistDetails() {
       </div>
 
       <div className="h-full w-[60%] relative">
+        {inView === false && searchParams.get("id") === current_playlist_id ? (
+          <button
+            onClick={() => {
+              entry?.target.scrollIntoView({
+                behavior: "smooth",
+                block: "center",
+              });
+            }}
+            className="absolute bottom-10 right-10 z-[103]"
+          >
+            <BiCurrentLocation size={22} color="rgba(255, 255, 255, .6)" />
+          </button>
+        ) : (
+          ""
+        )}
+
         <div className="h-[40px] flex items-center mr-4 px-2 text-[1.3rem] text-white/80 border-b border-t border-white/20 absolute top-[0px] left-0 right-0 z-[101] bg-slate-500">
           <p className="w-[50%]">Bài hát</p>
           <p className="w-[15%] flex justify-center">Thời gian</p>
@@ -80,17 +133,19 @@ export default function PlaylistDetails() {
           </p>
         </div>
 
-        <div className="overflow-y-auto relative h-full">
+        <div ref={swiperRef} className="overflow-y-auto relative h-full">
           <Swiper slidesPerView={1} className="pt-[40px]">
             <SlidesNavigates
-              title={`${data?.description}`}
+              title={`${data?.data?.data.description}`}
               slot="container-start"
             />
 
             <SwiperSlide>
-              {list.map((song, index) => (
+              {currentPlaylistReference.map((song, index) => (
                 <SongHorizontalDisplay
+                  ref={currentSongId === song.encodeId ? ref : null}
                   key={index}
+                  belongTo={data?.data?.data.encodeId}
                   encodeId={song.encodeId}
                   duration={song.duration}
                   hasLyric={song.hasLyric}

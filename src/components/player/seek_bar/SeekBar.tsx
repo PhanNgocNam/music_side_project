@@ -51,11 +51,11 @@ export default forwardRef<HTMLAudioElement>(function SeekBar({}, ref) {
       defaultValue={0}
       value={percentPlayed}
       onChange={(event, newValue) => {
-        event.stopPropagation();
         if (ref && "current" in ref && ref.current) {
           setPercentPlayed(newValue as number);
           ref.current.currentTime = (duration * Number(newValue)) / 100;
         }
+        event.stopPropagation();
       }}
     />
   );

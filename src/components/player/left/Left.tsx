@@ -5,12 +5,17 @@ import { urls } from "../../../constant/requestURL";
 import { SongInfoTypes } from "../../../types/SongInfoTypes";
 import { ResponseDataTypes } from "../../../types/ResponseDataTypes";
 import moment from "moment";
+import { useNavigate } from "react-router-dom";
 
 export default function Left() {
   const { currentSongId } = useAppSelector((state) => state.currentSongId);
   const { duration } = useAppSelector((state) => state.duration);
   const { currentTime } = useAppSelector((state) => state.currentTime);
   const [leftData, setLeftData] = useState<ResponseDataTypes<SongInfoTypes>>();
+  const navigate = useNavigate();
+  const { current_playlist_id } = useAppSelector(
+    (state) => state.currentPlaylistId
+  );
   useEffect(() => {
     if (currentSongId) {
       (async () => {
@@ -21,7 +26,10 @@ export default function Left() {
   }, [currentSongId]);
 
   return (
-    <div className="min-w-60 w-[240px] flex justify-start gap-3 items-center">
+    <div
+      onClick={() => navigate(`/vi/list/?id=${current_playlist_id}`)}
+      className="min-w-60 w-[240px] flex flex-1 justify-start gap-3 items-center"
+    >
       <div
         style={{
           height: "40px",

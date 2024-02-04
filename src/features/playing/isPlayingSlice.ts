@@ -18,10 +18,14 @@ export const isPlayingSlice = createSlice({
     triggerPauseOrPlay: (state) => {
       state.isPlaying = !state.isPlaying;
     },
+
+    setIsPlaying: (state) => {
+      state.isPlaying = true;
+    },
   },
 });
 
-export const { triggerPauseOrPlay } = isPlayingSlice.actions;
+export const { triggerPauseOrPlay, setIsPlaying } = isPlayingSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectIsPlaying = (state: RootState) => state.playing.isPlaying;

@@ -1,24 +1,17 @@
 import { useEffect, useState } from "react";
 import { get } from "../utils/get";
-import { ResponseDataTypes } from "../types/ResponseDataTypes";
 
-export default function useGetData<T, V = []>(url: string, dependencies?: V[]) {
-  const [data, setData] = useState<T | null>(null);
-
+export default function useGetData<T, V = undefined>(
+  url: string,
+  dependencies: V[]
+) {
+  const [returnData, setReturnData] = useState<T | null>(null);
   useEffect(() => {
-    handleGetData(url)
-      .then((result: ResponseDataTypes<T>) => {
-        if (!data) {
-          setData(result.data.data);
-        }
-      })
-      .catch((err: Error) => console.log(err.message));
-  }, [...[dependencies]]);
+    (async function () {
+      const { data } = await get(url);
+      if (returnData === null) setReturnData(data);
+    })();
+  }, [...dependencies]);
 
-  async function handleGetData(url: string) {
-    const { data } = await get(url);
-    return data;
-  }
-
-  return data;
+  return returnData;
 }

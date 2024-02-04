@@ -1,6 +1,7 @@
 import { ArtistsTypes } from "./ArtistsType";
 
 export type SongTypes = {
+  belongTo?: string;
   encodeId: string;
   title: string;
   thumbnailM: string;
