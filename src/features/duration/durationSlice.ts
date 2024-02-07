@@ -22,8 +22,4 @@ export const durationSlice = createSlice({
 });
 
 export const { setDuration } = durationSlice.actions;
-
-// Other code such as selectors can use the imported `RootState` type
-export const selectDuration = (state: RootState) => state.duration.duration;
-
 export default durationSlice.reducer;

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { MdOutlineCancel } from "react-icons/md";
 import { CiSearch } from "react-icons/ci";
 import { ResponseDataTypes } from "../../types/ResponseDataTypes";
@@ -6,20 +6,27 @@ import { searchTypes } from "../../types/SearchTypes";
 import { urls } from "../../constant/requestURL";
 import { get } from "../../utils/get";
 import { useNavigate } from "react-router-dom";
+import useDebounce from "../../hooks/useDebounce";
+import { AiOutlineLoading } from "react-icons/ai";
 
 export default function Search() {
   const [text, setText] = useState("");
   const [searchData, setSearchData] =
     useState<ResponseDataTypes<searchTypes> | null>(null);
   const navigate = useNavigate();
-  useEffect(() => {
-    if (text !== "") {
+
+  useDebounce<string>(
+    () => {
       (async function search() {
-        const { data } = await get(`${urls.search}?id=${text}`);
-        setSearchData(data);
+        if (text !== null) {
+          const { data } = await get(`${urls.search}?id=${text}`);
+          setSearchData(data);
+        }
       })();
-    }
-  }, [text]);
+    },
+    1000,
+    [text]
+  );
 
   return (
     <div className="relative w-full flex items-center justify-between p-2 rounded-md bg-white ">
@@ -32,21 +39,31 @@ export default function Search() {
         value={text}
         placeholder="Tìm kiếm ca sĩ, bài hát, danh..."
       />
+
       {text ? (
-        <span
-          className="text-black/70 cursor-pointer"
-          onClick={() => setText("")}
-        >
-          <MdOutlineCancel size={20} />
-        </span>
+        searchData?.result === 1 ? (
+          <span
+            className="text-black/70 cursor-pointer"
+            onClick={() => {
+              setSearchData(null);
+              setText("");
+            }}
+          >
+            <MdOutlineCancel size={20} />
+          </span>
+        ) : (
+          <span className="animate-spin">
+            <AiOutlineLoading size={20} />
+          </span>
+        )
       ) : (
         ""
       )}
 
-      {text ? (
+      {text && searchData?.result === 1 ? (
         <div className="absolute left-0 right-0 top-[36px] h-[50dvh] overflow-y-scroll bg-white ">
           <div className="pl-2 text-[1.3rem] py-1 font-bold">Nghệ sỹ</div>
-          {searchData?.data?.data?.artists.map((artist, index) => (
+          {searchData?.data?.data?.artists?.map((artist, index) => (
             <div
               onClick={() => navigate(`/vi/artists?id=${artist.alias}`)}
               className="flex gap-4 text-[1.2rem] items-center p-1 pl-2 hover:bg-black/10 border-b border-black/[0.04] cursor-pointer"

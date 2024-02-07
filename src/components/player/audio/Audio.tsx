@@ -6,6 +6,7 @@ import { useAppSelector } from "../../../hooks/useAppSelector";
 import { setReadyState } from "../../../features/can_play/canPlaySlice";
 import { handleNextSong } from "../../../utils/handleNextSong";
 import { setPause } from "../../../features/pause/pauseSlice";
+import { setDuration } from "../../../features/duration/durationSlice";
 
 const Audio = React.forwardRef<HTMLAudioElement, {}>(({}, ref) => {
   const dispatch = useAppDispatch();
@@ -20,7 +21,12 @@ const Audio = React.forwardRef<HTMLAudioElement, {}>(({}, ref) => {
         loop={isLoop}
         onCanPlay={() => dispatch(setReadyState())}
         onPause={() => dispatch(setPause(true))}
-        onPlay={() => dispatch(setPause(false))}
+        onPlay={() => {
+          if (ref && "current" in ref && ref.current) {
+            console.log(ref.current.duration);
+          }
+          dispatch(setPause(false));
+        }}
         onTimeUpdate={() => {
           if (ref && "current" in ref && ref.current) {
             dispatch(setCurrentTime(ref.current.currentTime));

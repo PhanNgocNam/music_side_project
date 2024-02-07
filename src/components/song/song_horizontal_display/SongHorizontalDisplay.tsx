@@ -12,11 +12,11 @@ import { setDuration } from "../../../features/duration/durationSlice";
 import { GrVolume } from "react-icons/gr";
 import { setIsPlaying } from "../../../features/playing/isPlayingSlice";
 import { useAppSelector } from "../../../hooks/useAppSelector";
-import React, { useEffect, useMemo, useRef } from "react";
+import React, { useEffect } from "react";
 import { setCurrentPlaylist } from "../../../features/current_playlist/currentPlaylistSlice";
 import { setCurrentPlaylistId } from "../../../features/current_playlist_id/current_playlist_id";
 import { setNotReadyState } from "../../../features/can_play/canPlaySlice";
-import { TbLoader2 } from "react-icons/tb";
+import { AiOutlineLoading } from "react-icons/ai";
 
 export default React.forwardRef<HTMLDivElement | null, SongTypes>(
   function SongHorizontalDisplay(
@@ -58,7 +58,7 @@ export default React.forwardRef<HTMLDivElement | null, SongTypes>(
     const playingNode = ready ? (
       <GrVolume size={20} className="shadow-2xl text-white" />
     ) : (
-      <TbLoader2 size={22} className="animate-spin text-white" />
+      <AiOutlineLoading size={20} className="animate-spin text-white" />
     );
 
     const handlePlayNewSong = () => {

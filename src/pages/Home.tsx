@@ -14,7 +14,7 @@ export default function Home() {
   return (
     <div
       style={{
-        height: "calc(100% - 64px)",
+        height: "calc(100%)",
       }}
       className="w-[940px]"
     >
