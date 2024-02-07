@@ -61,7 +61,7 @@ export default function PlaylistDetails() {
           }}
           className="w-[280px] h-[280px] bg-contain rounded-md  bg-no-repeat shadow-2xl"
         >
-          {isPlaying ? (
+          {isPlaying && current_playlist_id === data?.data.data.encodeId ? (
             <div className="flex justify-center items-center h-full w-full bg-black/30">
               {ready ? (
                 <div className="flex justify-center items-center p-10 w-[80px] h-[80px] rounded-full border border-white/60">
@@ -81,17 +81,17 @@ export default function PlaylistDetails() {
             {data?.data?.data.title}
           </p>
           <p className="text-[1.2rem] pt-2">
-            {data?.data.data.song.total} Bài hát
+            {data?.data?.data?.song.total} Bài hát
           </p>
           <p className="text-[1.2rem] pt-2">
             Cập nhật:{" "}
             {moment(
-              data?.data.data.contentLastUpdate &&
-                data?.data.data.contentLastUpdate * 1000
+              data?.data?.data?.contentLastUpdate &&
+                data?.data?.data?.contentLastUpdate * 1000
             ).format("DD/MM/yy")}
           </p>
           <p className="text-[1.2rem] pt-2">
-            {data?.data.data.artists.map((artist) => (
+            {data?.data?.data?.artists?.map((artist) => (
               <Link
                 key={artist.id}
                 to={artist.name}

@@ -6,4 +6,5 @@ export const urls = {
   sound: rootUrl + "/get/song/sound",
   artist: rootUrl + "/get/artist" /** get/artist?id=Tue-Phuong */,
   songInfo: rootUrl + "/get/song/info" /** get/song/info?id=Z6D6009U */,
+  search: rootUrl + "/get/song/search" /**get/song/search?id=asdasd */,
 };

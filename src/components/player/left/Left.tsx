@@ -27,7 +27,7 @@ export default function Left() {
 
   return (
     <div
-      onClick={() => navigate(`/vi/list/?id=${current_playlist_id}`)}
+      onClick={() => navigate(`/vi/list?id=${current_playlist_id}`)}
       className="min-w-60 w-[240px] flex flex-1 justify-start gap-3 items-center"
     >
       <div

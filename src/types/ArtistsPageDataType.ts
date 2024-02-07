@@ -1,6 +1,4 @@
-import { CarouselItemTypes } from "./CarouselItemType";
-
-export type ArtistsPageDataTypes = {
+export type ArtistsPageDataTypes<T> = {
   id: string;
   name: string;
   link?: string;
@@ -15,9 +13,9 @@ export type ArtistsPageDataTypes = {
   birthday: string;
   realname?: string;
   totalFollow?: number;
-  sections?: {
+  sections: {
     sectionType: string;
     title: string;
-    items: CarouselItemTypes[];
+    items: T[];
   }[];
 };

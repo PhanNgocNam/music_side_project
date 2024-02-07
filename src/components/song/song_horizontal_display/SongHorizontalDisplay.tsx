@@ -51,6 +51,10 @@ export default React.forwardRef<HTMLDivElement | null, SongTypes>(
       currentSongId === encodeId &&
       current_playlist_id === searchParams.get("id");
 
+    const isCurrentSongConditional =
+      currentSongId === encodeId &&
+      current_playlist_id === searchParams.get("id");
+
     const playingNode = ready ? (
       <GrVolume size={20} className="shadow-2xl text-white" />
     ) : (
@@ -108,6 +112,14 @@ export default React.forwardRef<HTMLDivElement | null, SongTypes>(
               <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer hover:opacity-70 shadow-2xl">
                 {isPlayingConditional ? (
                   playingNode
+                ) : isPause && isCurrentSongConditional ? (
+                  <PlayIcon
+                    onClick={() => dispatch(setIsPlaying())}
+                    width={1.8}
+                    height={1.8}
+                    fill="white"
+                    classname={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 group-hover:block`}
+                  />
                 ) : (
                   <PlayIcon
                     onClick={() => handlePlayNewSong()}
