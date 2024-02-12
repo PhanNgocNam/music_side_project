@@ -1,5 +1,4 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import type { RootState } from "../../app/store";
 
 type CurrentSongIdType = {
   currentSongId: string;

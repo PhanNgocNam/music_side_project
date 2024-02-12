@@ -1,4 +1,3 @@
-import React from "react";
 import { setCurrentTime } from "../../../features/current_time/currentTimeSlice";
 import { useAppDispatch } from "../../../hooks/useAppDispatch";
 import { useAppSelector } from "../../../hooks/useAppSelector";
@@ -6,7 +5,7 @@ import { useAppSelector } from "../../../hooks/useAppSelector";
 import { setReadyState } from "../../../features/can_play/canPlaySlice";
 import { handleNextSong } from "../../../utils/handleNextSong";
 import { setPause } from "../../../features/pause/pauseSlice";
-import { setDuration } from "../../../features/duration/durationSlice";
+import * as React from "react";
 
 const Audio = React.forwardRef<HTMLAudioElement, {}>(({}, ref) => {
   const dispatch = useAppDispatch();

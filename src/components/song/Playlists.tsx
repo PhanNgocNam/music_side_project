@@ -3,16 +3,13 @@ import HeartIcon from "../../assets/icons/HeartIcon";
 import PlayIcon from "../../assets/icons/PlayIcon";
 import { ArtistsTypes } from "../../types/ArtistsType";
 import { Link, useNavigate } from "react-router-dom";
-import { PlaylistTypes } from "../../types/PlaylistTypes";
-import { useAppDispatch } from "../../hooks/useAppDispatch";
-import { setCurrentPlaylist } from "../../features/current_playlist/currentPlaylistSlice";
+
 import { CarouselItemTypes } from "../../types/CarouselItemType";
 
 export default function Playlists({
   encodeId,
   title,
-  description,
-  thumbnail,
+
   thumbnailM,
   artists,
 }: CarouselItemTypes) {

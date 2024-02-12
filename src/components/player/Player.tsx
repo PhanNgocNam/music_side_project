@@ -9,7 +9,6 @@ import { useAppSelector } from "../../hooks/useAppSelector";
 
 export default function Player() {
   const ref = useRef<HTMLAudioElement | null>(null);
-  const { isPlaying } = useAppSelector((state) => state.playing);
   const { currentSongId } = useAppSelector((state) => state.currentSongId);
   return (
     <>

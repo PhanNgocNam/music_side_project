@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useAppDispatch } from "../../../hooks/useAppDispatch";
 import { useAppSelector } from "../../../hooks/useAppSelector";
 import ShuffleIcon from "../../../assets/icons/ShuffleIcon";
@@ -12,7 +12,6 @@ import { setRandom } from "../../../features/random/randomSlice";
 import PlayButton from "../../play_button/PlayButton";
 
 export default React.forwardRef<HTMLAudioElement>(function MainPlayer({}, ref) {
-  const [audioStatus, setAudioStatus] = useState("unknown");
   const audioContext = new AudioContext();
 
   const dispatch = useAppDispatch();

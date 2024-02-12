@@ -13,16 +13,7 @@ import { useAppDispatch } from "../../../hooks/useAppDispatch";
 
 export default React.forwardRef<HTMLDivElement | null, SongTypes>(
   function SongHorizontalDisplay(
-    {
-      encodeId,
-      title,
-      duration,
-      releaseAt,
-      artists,
-      thumbnail,
-      belongTo,
-      hasLyric,
-    },
+    { encodeId, title, duration, releaseAt, artists, thumbnail, belongTo },
     songHorizontalDisplayRef
   ) {
     const dispatch = useAppDispatch();

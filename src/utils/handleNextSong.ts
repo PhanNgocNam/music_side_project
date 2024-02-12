@@ -12,12 +12,12 @@ export async function handleNextSong() {
   const { currentSongId } = store.getState().currentSongId;
   const { isRandom } = store.getState().random;
   let index = list.findIndex((song) => song.encodeId === currentSongId);
-  let songIndexPosition;
+  let songIndexPosition: number;
   if (!isRandom) {
-    songIndexPosition = index !== -1 && index + 1;
+    songIndexPosition = index !== -1 ? index + 1 : 0;
   } else {
     songIndexPosition =
-      index !== -1 && Math.floor(Math.random() * (list.length + 1));
+      index !== -1 ? Math.floor(Math.random() * (list.length + 1)) : 0;
   }
   if (songIndexPosition && songIndexPosition < list.length) {
     store.dispatch(setDuration(list[songIndexPosition].duration));

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { IoIosArrowDropleft, IoIosArrowDropright } from "react-icons/io";
 import { useSwiper } from "swiper/react";
 
 type SlidesNavigateTypes = {
