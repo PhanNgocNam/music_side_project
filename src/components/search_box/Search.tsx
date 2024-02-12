@@ -30,7 +30,7 @@ export default function Search() {
   );
 
   return (
-    <div className="relative w-full flex items-center justify-between p-2 rounded-md bg-white ">
+    <div className="relative w-full flex items-center justify-between p-2 rounded-md bg-white sm:w-2/3 sm:h-fit sm:mx-2">
       <span>
         <CiSearch size={20} />
       </span>

@@ -52,7 +52,7 @@ export default function Playlists({
           <p className="text-[1.4rem] one_line">{title}</p>
           <HeartIcon height={2} width={2} />
         </Box>
-        <p className="text-white/80 text-[1.1rem] min-h-[30px]">
+        <p className="text-white/80 text-[1.1rem] min-h-[30px] two_line">
           {artists?.map((artist: ArtistsTypes) => (
             <Link
               to={`/p2n/artists?id=${artist.alias}`}

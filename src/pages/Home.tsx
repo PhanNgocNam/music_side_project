@@ -35,8 +35,8 @@ export default function Home() {
                 spaceBetween: 10,
               },
             }}
+            slidesPerView={2}
             className="mb-3 w-full"
-            slidesPerView={5}
             key={list.title}
             title={list.title}
             items={list.items}
