@@ -1,25 +1,29 @@
 import { useSwiper } from "swiper/react";
 import { IoIosArrowDropleft, IoIosArrowDropright } from "react-icons/io";
-import { MdOutlineQueueMusic } from "react-icons/md";
+
+type CarouselHeaderTypes = {
+  title?: string;
+  disableLeftArrow: boolean;
+  disableRightArrow: boolean;
+  className?: string;
+  slot?: "container-start" | "container-end" | "wrapper-start" | "wrapper-end";
+};
 
 export default function CustomeNavigation({
   className,
   title,
   disableLeftArrow,
   disableRightArrow,
-}: {
-  title?: string;
-  disableLeftArrow: boolean;
-  disableRightArrow: boolean;
-  className?: string;
-}) {
+  slot,
+}: CarouselHeaderTypes) {
   const swiper = useSwiper();
   return (
     <div
-      className={`flex w-full min-w-[100px] h-[50px] justify-between items-center  absolute top-0 right-0 ${className}`}
+      slot={slot}
+      className={`flex w-[100%] min-w-[100px] justify-between items-start leading-none pt-6 ${className}`}
     >
-      <p className="text-[#FFFFFF] text-[1.8rem] leading-6 flex items-center gap-3">
-        <MdOutlineQueueMusic className="border border-white/40" />
+      <p className="text-[#FFFFFF] text-[1.6rem] leading-6 flex items-center gap-3">
+        {/* <MdOutlineQueueMusic className="border border-white/40" /> */}
         {title}
       </p>
 

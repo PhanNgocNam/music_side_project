@@ -65,7 +65,7 @@ export default React.forwardRef<HTMLAudioElement>(function MainPlayer({}, ref) {
           />{" "}
         </button>
 
-        {/* Btn */}
+        {/*Play Btn */}
         <PlayButton />
 
         <button

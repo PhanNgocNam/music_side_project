@@ -3,27 +3,48 @@ import { urls } from "../constant/requestURL";
 import useGetData from "../hooks/useGetData";
 import { HomePageDataTypes } from "../types/HomaPageDataTypes";
 import { ResponseDataTypes } from "../types/ResponseDataTypes";
+import HomeSkeleton from "./skeletons/HomeSkeleton";
 
 export default function Home() {
   const data = useGetData<ResponseDataTypes<HomePageDataTypes>, string>(
     urls.home,
     []
   );
-  // console.log(data?.data?.data?.items[5]);
+
+  const homePlayList = data?.data?.data?.items
+    .filter((item) => item.sectionType === "playlist")
+    .splice(1);
 
   return (
     <div
       style={{
         height: "calc(100%)",
       }}
-      className="w-[940px]"
+      className="w-full p-2"
     >
-      <Carousel
-        slidesPerView={5}
-        key={data?.data?.data.items[5].title}
-        title={data?.data?.data.items[5].title}
-        items={data?.data?.data.items[5].items}
-      />
+      {data?.result === 1 ? (
+        homePlayList?.map((list) => (
+          <Carousel
+            breakpoints={{
+              400: {
+                slidesPerView: 3,
+                spaceBetween: 10,
+              },
+              970: {
+                slidesPerView: 5,
+                spaceBetween: 10,
+              },
+            }}
+            className="mb-3 w-full"
+            slidesPerView={5}
+            key={list.title}
+            title={list.title}
+            items={list.items}
+          />
+        ))
+      ) : (
+        <HomeSkeleton />
+      )}
     </div>
   );
 }

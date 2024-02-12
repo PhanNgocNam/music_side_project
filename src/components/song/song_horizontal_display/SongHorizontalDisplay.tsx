@@ -1,22 +1,15 @@
+import React from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import HeartIcon from "../../../assets/icons/HeartIcon";
 import { SongTypes } from "../../../types/SongTypes";
 import moment from "moment";
 import PlayIcon from "../../../assets/icons/PlayIcon";
-import { urls } from "../../../constant/requestURL";
-import { get } from "../../../utils/get";
-import { useAppDispatch } from "../../../hooks/useAppDispatch";
-import { setCurrentSongUrl } from "../../../features/current_song_url/currentSongUrlSlide";
-import { setCurrentSongId } from "../../../features/current_song_id/currentSongIdSlice";
-import { setDuration } from "../../../features/duration/durationSlice";
 import { GrVolume } from "react-icons/gr";
 import { setIsPlaying } from "../../../features/playing/isPlayingSlice";
 import { useAppSelector } from "../../../hooks/useAppSelector";
-import React, { useEffect } from "react";
-import { setCurrentPlaylist } from "../../../features/current_playlist/currentPlaylistSlice";
-import { setCurrentPlaylistId } from "../../../features/current_playlist_id/current_playlist_id";
-import { setNotReadyState } from "../../../features/can_play/canPlaySlice";
 import { AiOutlineLoading } from "react-icons/ai";
+import { handlePlayNewSong } from "../../../utils/handlePlayNewSong";
+import { useAppDispatch } from "../../../hooks/useAppDispatch";
 
 export default React.forwardRef<HTMLDivElement | null, SongTypes>(
   function SongHorizontalDisplay(
@@ -27,9 +20,8 @@ export default React.forwardRef<HTMLDivElement | null, SongTypes>(
       releaseAt,
       artists,
       thumbnail,
-      thumbnailM,
-      hasLyric,
       belongTo,
+      hasLyric,
     },
     songHorizontalDisplayRef
   ) {
@@ -43,9 +35,7 @@ export default React.forwardRef<HTMLDivElement | null, SongTypes>(
     );
     const { isPlaying } = useAppSelector((state) => state.playing);
     const { ready } = useAppSelector((state) => state.canPlay);
-    const { currentPlaylistReference } = useAppSelector(
-      (state) => state.currentPlaylist
-    );
+
     const isPlayingConditional =
       isPlaying &&
       currentSongId === encodeId &&
@@ -60,30 +50,6 @@ export default React.forwardRef<HTMLDivElement | null, SongTypes>(
     ) : (
       <AiOutlineLoading size={20} className="animate-spin text-white" />
     );
-
-    const handlePlayNewSong = () => {
-      dispatch(setIsPlaying());
-      dispatch(setNotReadyState());
-      dispatch(setCurrentPlaylistId(belongTo ? belongTo : ""));
-      dispatch(setCurrentPlaylist(currentPlaylistReference));
-      dispatch(setDuration(duration));
-      get(`${urls.sound}?id=${encodeId}`).then((result) => {
-        dispatch(setCurrentSongId(encodeId));
-        dispatch(setCurrentSongUrl(result.data?.data?.data?.[128]));
-      });
-    };
-
-    useEffect(() => {
-      if (
-        songHorizontalDisplayRef &&
-        "current" in songHorizontalDisplayRef &&
-        songHorizontalDisplayRef.current
-      ) {
-        if (encodeId !== currentSongId) {
-          songHorizontalDisplayRef.current.remove();
-        }
-      }
-    }, [currentSongId]);
 
     return (
       <div
@@ -122,7 +88,15 @@ export default React.forwardRef<HTMLDivElement | null, SongTypes>(
                   />
                 ) : (
                   <PlayIcon
-                    onClick={() => handlePlayNewSong()}
+                    onClick={() =>
+                      handlePlayNewSong(
+                        duration,
+                        belongTo ? belongTo : "",
+                        encodeId,
+                        `${title}`,
+                        "playlist"
+                      )
+                    }
                     width={1.8}
                     height={1.8}
                     fill="white"

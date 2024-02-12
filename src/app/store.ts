@@ -10,6 +10,7 @@ import canPlaySlice from "../features/can_play/canPlaySlice";
 import loopSlice from "../features/loop/loopSlice";
 import randomSlice from "../features/random/randomSlice";
 import pauseSlice from "../features/pause/pauseSlice";
+import currentSongNameSlice from "../features/current_song_name/currentSongNameSlice";
 
 export const store = configureStore({
   reducer: {
@@ -18,6 +19,7 @@ export const store = configureStore({
     currentTime: currentTimeSlice,
     currentSongUrl: currentSongUrlSlice,
     currentSongId: currentSongIdSlice,
+    currentSongName: currentSongNameSlice,
     currentPlaylist: currentPlaylistSlice,
     currentPlaylistId: currentPlaylistIdSlice,
     canPlay: canPlaySlice,

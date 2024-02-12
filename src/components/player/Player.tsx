@@ -24,7 +24,7 @@ export default function Player() {
           transition={{
             duration: 1,
           }}
-          className="h-[64px] w-full flex items-center justify-center absolute left-0 right-0 bottom-0 bg-[#1E1E1E] p-2 z-[110]"
+          className="h-[64px] flex items-center justify-center absolute left-2 right-2 bottom-0 bg-[#1E1E1E] p-2 z-[110] rounded-br-md rounded-bl-md"
         >
           <Audio ref={ref} />
           <SeekBar ref={ref} />

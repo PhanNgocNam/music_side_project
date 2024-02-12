@@ -8,6 +8,7 @@ import { get } from "../../utils/get";
 import { useNavigate } from "react-router-dom";
 import useDebounce from "../../hooks/useDebounce";
 import { AiOutlineLoading } from "react-icons/ai";
+import { handlePlayNewSong } from "../../utils/handlePlayNewSong";
 
 export default function Search() {
   const [text, setText] = useState("");
@@ -35,9 +36,12 @@ export default function Search() {
       </span>
       <input
         className="w-full outline-none text-[1.2rem] h-10 rounded-md pl-[.8em]"
-        onChange={(e) => setText(e.target.value)}
+        onChange={(e) => {
+          setText(e.target.value);
+          setSearchData(null);
+        }}
         value={text}
-        placeholder="Tìm kiếm ca sĩ, bài hát, danh..."
+        placeholder="Tìm kiếm ca sĩ, bài hát, danh sách phát..."
       />
 
       {text ? (
@@ -65,7 +69,7 @@ export default function Search() {
           <div className="pl-2 text-[1.3rem] py-1 font-bold">Nghệ sỹ</div>
           {searchData?.data?.data?.artists?.map((artist, index) => (
             <div
-              onClick={() => navigate(`/vi/artists?id=${artist.alias}`)}
+              onClick={() => navigate(`/p2n/artists?id=${artist.alias}`)}
               className="flex gap-4 text-[1.2rem] items-center p-1 pl-2 hover:bg-black/10 border-b border-black/[0.04] cursor-pointer"
               key={index}
             >
@@ -83,7 +87,16 @@ export default function Search() {
           <div className="pl-2 text-[1.3rem] py-1 font-bold">Bài hát</div>
           {searchData?.data?.data?.songs.map((song, index) => (
             <div
-              onClick={() => navigate(`/vi/song?id=${song.encodeId}`)}
+              onClick={() => {
+                handlePlayNewSong(
+                  song.duration,
+                  "",
+                  song.encodeId,
+                  `${song.title}`,
+                  "song"
+                );
+                navigate(`/p2n/song?id=${song.encodeId}`);
+              }}
               className="flex gap-4 text-[1.2rem] items-center p-1 pl-2 hover:bg-black/10 border-b border-black/[0.04] cursor-pointer"
               key={index}
             >
@@ -113,7 +126,7 @@ export default function Search() {
           </div>
           {searchData?.data?.data?.playlists.map((playlist, index) => (
             <div
-              onClick={() => navigate(`/vi/list?id=${playlist.encodeId}`)}
+              onClick={() => navigate(`/p2n/list?id=${playlist.encodeId}`)}
               className="flex gap-4 text-[1.2rem] items-center p-1 pl-2 hover:bg-black/10 border-b border-black/[0.04] cursor-pointer"
               key={index}
             >

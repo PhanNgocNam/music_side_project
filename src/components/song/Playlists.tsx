@@ -33,14 +33,14 @@ export default function Playlists({
     >
       <Box overflow="hidden" borderRadius={1} width={"fit-content"}>
         <img
-          className="min-w-[160px] h-[160px] w-[160px] object-contain pointer-events-none"
+          className="min-w-full w-full object-contain pointer-events-none"
           src={thumbnailM}
           alt=""
         />
       </Box>
 
       {/* Begin title box */}
-      <Box width={"160px"}>
+      <Box>
         <Box
           display={"flex"}
           justifyContent={"space-between"}
@@ -55,7 +55,7 @@ export default function Playlists({
         <p className="text-white/80 text-[1.1rem] min-h-[30px]">
           {artists?.map((artist: ArtistsTypes) => (
             <Link
-              to={`/vi/artists?id=${artist.alias}`}
+              to={`/p2n/artists?id=${artist.alias}`}
               className="group hover:underline hover:text-blue-300"
             >
               {artist.name} <span className="group-last:hidden">{", "}</span>
@@ -69,16 +69,16 @@ export default function Playlists({
       {/* Begin play box */}
       <Box
         display={"flex"}
-        justifyContent={"space-between"}
+        justifyContent={"flex-end"}
         alignItems={"flex-end"}
         color={"white"}
         fontSize={"8px"}
-        width={"160px"}
+        width={"100%"}
       >
         <p></p>
         <button
           onClick={() => {
-            navigate(`/vi/list?id=${encodeId}`);
+            navigate(`/p2n/list?id=${encodeId}`);
           }}
           className="h-[30px] w-[30px] bg-white rounded-full relative hover:scale-[1.2]"
         >

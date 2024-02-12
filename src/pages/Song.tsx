@@ -3,14 +3,13 @@ import { urls } from "../constant/requestURL";
 import useGetData from "../hooks/useGetData";
 import { ResponseDataTypes } from "../types/ResponseDataTypes";
 import { SongTypes } from "../types/SongTypes";
-import PlayIcon from "../assets/icons/PlayIcon";
 import PlayButton from "../components/play_button/PlayButton";
 
 export default function Song() {
   const [searchParams] = useSearchParams();
-  const data = useGetData<ResponseDataTypes<SongTypes>>(
+  const data = useGetData<ResponseDataTypes<SongTypes>, string | null>(
     `${urls.songInfo}?id=${searchParams.get("id")}`,
-    []
+    [searchParams.get("id")]
   );
 
   return (

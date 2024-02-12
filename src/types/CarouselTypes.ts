@@ -1,9 +1,11 @@
+import { SwiperProps } from "swiper/react";
 import { CarouselItemTypes } from "./CarouselItemType";
 
-export type CarouselTypes = {
+export interface CarouselTypes extends SwiperProps {
   hdClassName?: string;
   className?: string;
-  slidesPerView: number;
+  slidesPerView: number /** Default slide per view */;
   title?: string;
   items?: CarouselItemTypes[];
-};
+  sectionType?: string;
+}

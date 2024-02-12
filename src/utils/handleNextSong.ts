@@ -2,6 +2,7 @@ import { store } from "../app/store";
 import { urls } from "../constant/requestURL";
 import { setNotReadyState } from "../features/can_play/canPlaySlice";
 import { setCurrentSongId } from "../features/current_song_id/currentSongIdSlice";
+import { setCurrentSongName } from "../features/current_song_name/currentSongNameSlice";
 import { setCurrentSongUrl } from "../features/current_song_url/currentSongUrlSlide";
 import { setDuration } from "../features/duration/durationSlice";
 import { get } from "./get";
@@ -20,6 +21,7 @@ export async function handleNextSong() {
   }
   if (songIndexPosition && songIndexPosition < list.length) {
     store.dispatch(setDuration(list[songIndexPosition].duration));
+    store.dispatch(setCurrentSongName(list[songIndexPosition].title));
     store.dispatch(setNotReadyState());
     get(`${urls.sound}?id=${list[songIndexPosition].encodeId}`).then(
       (result) => {

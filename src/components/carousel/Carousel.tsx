@@ -10,6 +10,7 @@ export default function Carousel({
   slidesPerView,
   className,
   hdClassName,
+  breakpoints,
 }: CarouselTypes) {
   const [disableLeftArrow, setDisableLeftArrow] = useState(false);
   const [disableRightArrow, setDisableRightArrow] = useState(true);
@@ -32,7 +33,7 @@ export default function Carousel({
   return (
     <>
       <Swiper
-        className={`w-[100%] pt-16 relative ${className}`}
+        className={`${className}`}
         slidesPerView={slidesPerView}
         spaceBetween={10}
         onReachBeginning={() => {
@@ -44,18 +45,10 @@ export default function Carousel({
           setDisableRightArrow(false);
           setDisableLeftArrow(true);
         }}
-        // breakpoints={{
-        //   640: {
-        //     slidesPerView: 3,
-        //     spaceBetween: 10,
-        //   },
-        //   1024: {
-        //     slidesPerView: 5,
-        //     spaceBetween: 10,
-        //   },
-        // }}
+        breakpoints={breakpoints}
       >
         <CarouselHeader
+          slot="container-start"
           className={hdClassName}
           title={title}
           disableLeftArrow={disableLeftArrow}
