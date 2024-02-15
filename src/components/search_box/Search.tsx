@@ -65,7 +65,7 @@ export default function Search() {
       )}
 
       {text && searchData?.result === 1 ? (
-        <div className="absolute left-0 right-0 top-[36px] h-[50dvh] overflow-y-scroll bg-white ">
+        <div className="absolute left-0 right-0 top-[36px] h-[50dvh] overflow-y-scroll bg-white sm:fixed sm:m-2 sm:rounded-md sm:top-20">
           <div className="pl-2 text-[1.3rem] py-1 font-bold">Nghệ sỹ</div>
           {searchData?.data?.data?.artists?.map((artist, index) => (
             <div

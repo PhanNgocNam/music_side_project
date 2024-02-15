@@ -26,6 +26,7 @@ export default function Playlists({
       justifyContent="space-between"
       alignItems={"center"}
       flexDirection="column"
+      position={"relative"}
       zIndex={100}
     >
       <Box overflow="hidden" borderRadius={1} width={"fit-content"}>

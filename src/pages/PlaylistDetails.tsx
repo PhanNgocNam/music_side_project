@@ -50,17 +50,17 @@ export default function PlaylistDetails() {
   console.log(inView);
 
   return (
-    <div className="flex h-fit pt-80 justify-start">
-      <div className="h-[fit] w-[38%]">
-        <div className="w-full flex flex-col items-center z-[101] justify-start text-white/50 sticky top-6">
+    <div className="flex h-fit pt-80 justify-start sm:pt-2 sm:flex-col">
+      <div className="h-[fit] w-[38%] sm:w-full">
+        <div className="w-full flex flex-col items-center z-[101] justify-start text-white/50 sticky top-6 sm:flex-row sm:items-start sm:aspect-[2/1] mb-2">
           <div
             style={{
               backgroundImage: `url(${data?.data?.data.thumbnailM})`,
             }}
-            className="w-[280px] h-[280px] bg-contain bg-no-repeat shadow-2xl rounded-tl-md rounded-tr-md relative"
+            className="w-[280px] h-[280px] bg-contain bg-no-repeat shadow-2xl rounded-tl-md rounded-tr-md relative sm:w-1/2 sm:bg-black sm:h-0 sm:pb-[50%]"
           >
             {isPlaying && current_playlist_id === data?.data.data.encodeId ? (
-              <div className="flex justify-center items-center h-full w-full bg-black/30">
+              <div className="flex justify-center items-center h-full w-full bg-black/30 sm:hidden">
                 {ready ? (
                   <div className="flex justify-center items-center p-10 w-[80px] h-[80px] rounded-full border border-white/60">
                     <img src={wave} />
@@ -91,7 +91,7 @@ export default function PlaylistDetails() {
             )}
           </div>
 
-          <div className="bg-[#4285F4] w-[280px] flex flex-col text-center items-center  shadow-2xl rounded-bl-md rounded-br-md">
+          <div className="bg-[#4285F4] w-[280px] flex flex-col text-center items-center  shadow-2xl rounded-bl-md rounded-br-md sm:w-1/2 sm:justify-center sm:h-full">
             <p className="font-bold text-[1.6rem] pt-2 text-white">
               {data?.data?.data.title}
             </p>
@@ -125,9 +125,9 @@ export default function PlaylistDetails() {
         </div>
       </div>
 
-      <div className="w-[60%] relative">
+      <div className="w-[60%] relative sm:w-full">
         <div className="w-full rounded-bl-lg rounded-br-lg pb-28">
-          <div className="h-[40px] flex items-center mr-4 px-2 text-[1.3rem] text-white/80 border-b border-t border-white/20 absolute top-[0px] left-0 right-0 z-[101] bg-slate-500">
+          <div className="h-[40px] flex items-center mr-4 px-2 text-[1.3rem] text-white/80 border-b border-t border-white/20 absolute top-[0px] left-0 right-0 z-[101] bg-slate-500 sm:mr-0 sm:bg-transparent">
             <p className="w-[50%]">Bài hát</p>
             <p className="w-[15%] flex justify-center">Thời gian</p>
             <p className="w-[35%]  flex justify-end items-center gap-4">

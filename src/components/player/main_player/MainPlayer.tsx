@@ -35,7 +35,7 @@ export default React.forwardRef<HTMLAudioElement>(function MainPlayer({}, ref) {
   }, [audioContext]);
 
   return (
-    <div className="flex justify-center items-center relative">
+    <div className="flex justify-center items-center relative flex-1">
       <div className="flex justify-between items-center min-w-[196px]">
         <button
           onClick={() => dispatch(setRandom(!isRandom))}

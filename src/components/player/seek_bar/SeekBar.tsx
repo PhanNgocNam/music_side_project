@@ -19,8 +19,9 @@ export default forwardRef<HTMLAudioElement>(function SeekBar({}, ref) {
         width: "calc(100% - 2px)",
         position: "absolute",
         transform: "translateY(50%)",
-        top: "-45%",
+        top: "-1px",
         left: "1px",
+        padding: 0,
         right: "1px",
         zIndex: "1000",
         "& .MuiSlider-track": {

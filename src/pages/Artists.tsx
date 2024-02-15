@@ -24,12 +24,13 @@ export default function Artists() {
       style={{
         backgroundImage: `url(${data?.data?.data.thumbnailM})`,
         backgroundPosition: "center",
-        backgroundRepeat: "repeat-x",
+        backgroundRepeat: "repeat",
+        backgroundSize: "contain",
       }}
-      className="w-full h-full z-[102]  overflow-y-auto"
+      className="w-full h-full z-[102]  overflow-y-auto pb-96"
     >
-      <div className="h-fit p-2 bg-black/40 w-full">
-        <div className="w-[600px] mx-auto px-2 text-white">
+      <div className="h-fit bg-black/40 w-full">
+        <div className="w-[600px] mx-auto px-2 text-white p-2 sm:w-full">
           <div className="flex justify-between w-[600px] pl-2">
             <div className="w-[30%]">
               <p className="font-bold text-[1.8rem]">{data?.data?.data.name}</p>
@@ -53,7 +54,8 @@ export default function Artists() {
               </p>
             </div>
           </div>
-          <div className="text-[1.2rem] pl-2">
+
+          <div className="text-[1.3rem] pl-2 sm:text-[1.2rem]">
             <span>
               {data?.data?.data?.sortBiography.split("<br >").map((para) => (
                 <p className="last:inline">{para}</p>
@@ -79,13 +81,20 @@ export default function Artists() {
               </>
             )}
           </div>
+
           {data?.data?.data.sections
             ?.filter((section) => section.sectionType === "playlist")
             ?.map((carousel) => (
               <Carousel
-                hdClassName="px-2"
-                className="px-2 pr-4"
-                slidesPerView={3}
+                breakpoints={{
+                  400: {
+                    slidesPerView: 3,
+                    spaceBetween: 10,
+                  },
+                }}
+                slidesPerView={2}
+                hdClassName="px-2 w-full"
+                className="px-2 pr-4 w-[100%]  mb-3"
                 items={carousel.items}
                 title={carousel.title}
               />

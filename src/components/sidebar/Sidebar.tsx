@@ -6,7 +6,7 @@ import { Avatar } from "@mui/material";
 
 export default function Sidebar() {
   return (
-    <div className="w-[20%] flex flex-col items-start h-full rounded-md bg-gradient-to-tl from-[#4285F4]/80 to-[#4285F4]/40 px-4 lg:w-[30%] sm:w-full sm:fixed sm:top-0 sm:left-0 sm:right-0 sm:flex-row sm:h-[64px] sm:items-center">
+    <div className="w-[20%] z-[102] flex flex-col items-start h-full rounded-md bg-gradient-to-tl from-[#4285F4]/80 to-[#4285F4]/40 px-4 lg:w-[30%] sm:w-full sm:absolute sm:top-0 sm:left-0 sm:right-0 sm:flex-row sm:h-[64px] sm:items-center">
       <div className="w-full my-4 flex justify-start items-center sm:w-fit">
         <Avatar src={Logo} sx={{ width: 24, height: 24 }} />
         <span className="flex-1 text-[#D7EDFF] text-[1.8rem] ml-2 tracking-tighter font-extrabold">

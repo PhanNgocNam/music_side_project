@@ -14,7 +14,7 @@ export default React.forwardRef<HTMLAudioElement>(function Right({}, ref) {
   return (
     <div
       onClick={() => navigate(`/p2n/list?id=${current_playlist_id}`)}
-      className="min-w-60 w-[240px] flex flex-1 gap-1 items-center justify-end"
+      className="min-w-60 w-[240px] flex flex-1 gap-1 items-center justify-end sm:hidden"
     >
       <button className="text-[#BBBBBB]  border w-[32px] h-[32px] flex justify-center items-center border-white/20 rounded-sm hover:bg-white/20">
         <GiMicrophone size={16} />

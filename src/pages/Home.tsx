@@ -16,12 +16,7 @@ export default function Home() {
     .splice(1);
 
   return (
-    <div
-      style={{
-        height: "calc(100%)",
-      }}
-      className="w-full p-2"
-    >
+    <div className="w-full p-2 h-fit pb-96">
       {data?.result === 1 ? (
         homePlayList?.map((list) => (
           <Carousel
