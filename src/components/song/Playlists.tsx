@@ -53,7 +53,7 @@ export default function Playlists({
         <p className="text-white/80 text-[1.1rem] min-h-[30px] two_line">
           {artists?.map((artist: ArtistsTypes) => (
             <Link
-              to={`/p2n/artists?id=${artist.alias}`}
+              to={`/artists?id=${artist.alias}`}
               className="group hover:underline hover:text-blue-300"
             >
               {artist.name} <span className="group-last:hidden">{", "}</span>
@@ -76,7 +76,7 @@ export default function Playlists({
         <p></p>
         <button
           onClick={() => {
-            navigate(`/p2n/list?id=${encodeId}`);
+            navigate(`/list?id=${encodeId}`);
           }}
           className="h-[30px] w-[30px] bg-white rounded-full relative hover:scale-[1.2]"
         >

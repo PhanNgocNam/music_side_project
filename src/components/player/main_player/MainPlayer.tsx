@@ -88,7 +88,7 @@ export default React.forwardRef<HTMLAudioElement>(function MainPlayer({}, ref) {
           <LoopIcon
             width={1.8}
             height={1.8}
-            classname="cursor-pointer"
+            classname="cursor-pointer sm:mr-2"
             fill={isLoop ? "#4285F4" : ""}
           />
         </button>

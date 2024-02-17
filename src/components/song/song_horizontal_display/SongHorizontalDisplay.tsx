@@ -51,7 +51,7 @@ export default React.forwardRef<HTMLDivElement | null, SongTypes>(
             encodeId === currentSongId ? "rgba(255, 255, 255, 0.08)" : "",
         }}
       >
-        <div className="w-[50%] h-full flex justify-between items-center z-[101]">
+        <div className="w-[50%] h-full flex justify-between items-center z-[101] sm:flex-1">
           <div className="flex items-center gap-4 justify-start">
             <div className="relative m-h-[48px] m-w-[48px] flex justify-center items-center group">
               <div
@@ -100,7 +100,7 @@ export default React.forwardRef<HTMLDivElement | null, SongTypes>(
             </div>
             <div className="z-[101]">
               <p className="text-[1.3rem] one_line text-white/80">{title}</p>
-              <p className="text-[1.1rem]">
+              <p className="text-[1.1rem] two_line">
                 {artists?.map((artist, index) => (
                   <Link
                     key={index}
@@ -116,10 +116,10 @@ export default React.forwardRef<HTMLDivElement | null, SongTypes>(
           </div>
         </div>
 
-        <div className="w-[15%] h-full flex justify-center items-center text-[1.1rem] z-[101">
+        <div className="w-[15%] h-full flex justify-center items-center text-[1.1rem] z-[101] sm:justify-end sm:pr-2">
           {moment.utc(duration * 1000).format("mm:ss")}
         </div>
-        <div className="w-[35%] h-full flex justify-end items-center text-[1.1rem] z-[101] gap-10">
+        <div className="w-[35%] h-full flex justify-end items-center text-[1.1rem] z-[101] gap-10 sm:hidden">
           <HeartIcon width={1.8} height={1.8} />
           {moment(releaseAt).format("DD/MM/YYYY")}
         </div>

@@ -13,8 +13,8 @@ export default function Song() {
   );
 
   return (
-    <div className="h-full">
-      <div className="bg-[#4285F4] absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-[70%] flex p-4 rounded-md">
+    <div className="h-full sm:h-fit">
+      <div className="bg-[#4285F4] absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-[70%] flex p-4 rounded-md sm:flex-col sm:-translate-y-[62%] text-white/80">
         <img
           className="z-[106] max-w-[240px] max-h-[240px] rounded-md"
           src={data?.data?.data.thumbnailM}

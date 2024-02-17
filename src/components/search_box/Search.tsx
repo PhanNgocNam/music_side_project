@@ -69,7 +69,7 @@ export default function Search() {
           <div className="pl-2 text-[1.3rem] py-1 font-bold">Nghệ sỹ</div>
           {searchData?.data?.data?.artists?.map((artist, index) => (
             <div
-              onClick={() => navigate(`/p2n/artists?id=${artist.alias}`)}
+              onClick={() => navigate(`/artists?id=${artist.alias}`)}
               className="flex gap-4 text-[1.2rem] items-center p-1 pl-2 hover:bg-black/10 border-b border-black/[0.04] cursor-pointer"
               key={index}
             >
@@ -95,7 +95,7 @@ export default function Search() {
                   `${song.title}`,
                   "song"
                 );
-                navigate(`/p2n/song?id=${song.encodeId}`);
+                navigate(`/song?id=${song.encodeId}`);
               }}
               className="flex gap-4 text-[1.2rem] items-center p-1 pl-2 hover:bg-black/10 border-b border-black/[0.04] cursor-pointer"
               key={index}
@@ -126,7 +126,7 @@ export default function Search() {
           </div>
           {searchData?.data?.data?.playlists.map((playlist, index) => (
             <div
-              onClick={() => navigate(`/p2n/list?id=${playlist.encodeId}`)}
+              onClick={() => navigate(`/list?id=${playlist.encodeId}`)}
               className="flex gap-4 text-[1.2rem] items-center p-1 pl-2 hover:bg-black/10 border-b border-black/[0.04] cursor-pointer"
               key={index}
             >

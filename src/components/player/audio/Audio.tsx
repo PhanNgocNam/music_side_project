@@ -21,9 +21,6 @@ const Audio = React.forwardRef<HTMLAudioElement, {}>(({}, ref) => {
         onCanPlay={() => dispatch(setReadyState())}
         onPause={() => dispatch(setPause(true))}
         onPlay={() => {
-          if (ref && "current" in ref && ref.current) {
-            console.log(ref.current.duration);
-          }
           dispatch(setPause(false));
         }}
         onTimeUpdate={() => {

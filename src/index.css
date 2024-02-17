@@ -43,3 +43,7 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+.MuiSlider-root {
+  padding: 0 !important;
+}

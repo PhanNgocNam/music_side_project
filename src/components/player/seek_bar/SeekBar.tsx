@@ -2,11 +2,14 @@ import { forwardRef, useEffect, useState } from "react";
 import { Slider } from "@mui/material";
 import { useAppSelector } from "../../../hooks/useAppSelector";
 import moment from "moment";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 export default forwardRef<HTMLAudioElement>(function SeekBar({}, ref) {
   const { currentTime } = useAppSelector((state) => state.currentTime);
   const { duration } = useAppSelector((state) => state.duration);
   const [percentPlayed, setPercentPlayed] = useState(0);
+
+  const matches = useMediaQuery("(max-width:600px)");
 
   useEffect(() => {
     setPercentPlayed((currentTime / duration) * 100);
@@ -19,9 +22,9 @@ export default forwardRef<HTMLAudioElement>(function SeekBar({}, ref) {
         width: "calc(100% - 2px)",
         position: "absolute",
         transform: "translateY(50%)",
-        top: "-1px",
+        top: "0px",
         left: "1px",
-        padding: 0,
+        // padding: "0px",
         right: "1px",
         zIndex: "1000",
         "& .MuiSlider-track": {
