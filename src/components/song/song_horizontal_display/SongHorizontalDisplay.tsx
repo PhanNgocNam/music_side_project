@@ -1,6 +1,5 @@
 import React from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import HeartIcon from "../../../assets/icons/HeartIcon";
 import { SongTypes } from "../../../types/SongTypes";
 import moment from "moment";
 import PlayIcon from "../../../assets/icons/PlayIcon";
@@ -10,6 +9,8 @@ import { useAppSelector } from "../../../hooks/useAppSelector";
 import { AiOutlineLoading } from "react-icons/ai";
 import { handlePlayNewSong } from "../../../utils/handlePlayNewSong";
 import { useAppDispatch } from "../../../hooks/useAppDispatch";
+import { MdAddToPhotos } from "react-icons/md";
+import Tooltip from "@mui/material/Tooltip";
 
 export default React.forwardRef<HTMLDivElement | null, SongTypes>(
   function SongHorizontalDisplay(
@@ -104,7 +105,7 @@ export default React.forwardRef<HTMLDivElement | null, SongTypes>(
                 {artists?.map((artist, index) => (
                   <Link
                     key={index}
-                    to={artist.name}
+                    to={`/artists?id=${artist.alias}`}
                     className="group hover:underline hover:text-blue-300"
                   >
                     {artist.name}
@@ -120,7 +121,19 @@ export default React.forwardRef<HTMLDivElement | null, SongTypes>(
           {moment.utc(duration * 1000).format("mm:ss")}
         </div>
         <div className="w-[35%] h-full flex justify-end items-center text-[1.1rem] z-[101] gap-10 sm:hidden">
-          <HeartIcon width={1.8} height={1.8} />
+          <Tooltip
+            title={
+              <h1 className="text-[1.4rem]">
+                Sorry. Tính năng này đang phát triển.
+              </h1>
+            }
+            placement="top-start"
+            arrow
+          >
+            <button className="text-[2rem]">
+              <MdAddToPhotos size={16} />
+            </button>
+          </Tooltip>
           {moment(releaseAt).format("DD/MM/YYYY")}
         </div>
       </div>

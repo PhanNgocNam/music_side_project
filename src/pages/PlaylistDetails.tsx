@@ -15,6 +15,10 @@ import { ResponseDataTypes } from "../types/ResponseDataTypes";
 import wave from "../assets/images/wave.gif";
 import { BiCurrentLocation } from "react-icons/bi";
 import { useInView } from "react-intersection-observer";
+import Loading from "../components/loading/loading";
+import PauseIcon from "../assets/icons/PauseIcon";
+import { setRandom } from "../features/random/randomSlice";
+import Tooltip from "@mui/material/Tooltip";
 
 export default function PlaylistDetails() {
   const [searchParams] = useSearchParams();
@@ -24,6 +28,7 @@ export default function PlaylistDetails() {
   );
   const { isPlaying } = useAppSelector((state) => state.playing);
   const { ready } = useAppSelector((state) => state.canPlay);
+  const { isRandom } = useAppSelector((state) => state.random);
   const { currentSongId } = useAppSelector((state) => state.currentSongId);
   const { current_playlist_id } = useAppSelector(
     (state) => state.currentPlaylistId
@@ -50,12 +55,12 @@ export default function PlaylistDetails() {
   return (
     <div className="flex h-fit pt-80 justify-start sm:pt-2 sm:flex-col sm:pb-96">
       <div
-        className="h-[fit] w-[38%] sm:w-full"
-        style={{
-          backgroundImage: `url(${data?.data?.data.thumbnailM})`,
-          backgroundPosition: "center",
-          backgroundSize: "cover",
-        }}
+        className={`h-[fit] w-[38%] sm:w-full`}
+        // style={{
+        //   backgroundImage: `url(${data?.data?.data.thumbnailM})`,
+        //   backgroundPosition: "center",
+        //   backgroundSize: "cover",
+        // }}
       >
         <div className="w-full flex flex-col items-center z-[101] justify-start text-white/50 sticky top-6 sm:flex-row sm:items-start sm:aspect-[2/1] sm:scroll-mt-48">
           <div
@@ -80,17 +85,28 @@ export default function PlaylistDetails() {
 
             {inView === false &&
             searchParams.get("id") === current_playlist_id ? (
-              <button
-                onClick={() => {
-                  entry?.target.scrollIntoView({
-                    behavior: "smooth",
-                    block: "center",
-                  });
-                }}
-                className="absolute top-4 right-4 z-[105] sm:hidden"
+              <Tooltip
+                title={
+                  <h1 className="text-[1.4rem]">Trỏ về bài hát đang phát.</h1>
+                }
+                placement="left-start"
+                arrow
               >
-                <BiCurrentLocation size={22} color="rgba(255, 255, 255, .6)" />
-              </button>
+                <button
+                  onClick={() => {
+                    entry?.target.scrollIntoView({
+                      behavior: "smooth",
+                      block: "center",
+                    });
+                  }}
+                  className="absolute top-4 right-4 z-[105] sm:hidden"
+                >
+                  <BiCurrentLocation
+                    size={22}
+                    color="rgba(255, 255, 255, .6)"
+                  />
+                </button>
+              </Tooltip>
             ) : (
               ""
             )}
@@ -123,8 +139,19 @@ export default function PlaylistDetails() {
               ))}
             </p>
 
-            <button className="flex items-center justify-between px-6 py-3 rounded-full gap-x-2 border border-black/20 text-[1.4rem] my-4">
-              <PlayIcon width={1.6} height={1.6} /> Phát ngẫu nhiên
+            <button
+              className="flex items-center justify-between px-6 py-3 rounded-full gap-x-2 border border-black/20 text-[1.4rem] my-4"
+              onClick={() => dispatch(setRandom(!isRandom))}
+            >
+              {isPlaying ? (
+                <PauseIcon width={1.6} height={1.6} fill="white" />
+              ) : (
+                <PlayIcon width={1.6} height={1.6} fill="white" />
+              )}{" "}
+              <span className={isRandom ? "text-white animate-pulse" : ""}>
+                {" "}
+                Phát ngẫu nhiên
+              </span>
             </button>
           </div>
         </div>
@@ -140,33 +167,37 @@ export default function PlaylistDetails() {
             </p>
           </div>
 
-          <div ref={swiperRef} className="overflow-y-auto relative h-full">
-            <Swiper slidesPerView={1} className="pt-[40px] sm:pt-1">
-              <SlidesNavigates
-                title={`${data?.data?.data.description}`}
-                slot="container-start"
-              />
+          {data ? (
+            <div ref={swiperRef} className="overflow-y-auto relative h-full">
+              <Swiper slidesPerView={1} className="pt-[40px] sm:pt-1">
+                <SlidesNavigates
+                  title={`${data?.data?.data.description}`}
+                  slot="container-start"
+                />
 
-              <SwiperSlide>
-                {currentPlaylistReference.map((song, index) => (
-                  <SongHorizontalDisplay
-                    ref={currentSongId === song.encodeId ? ref : null}
-                    key={index}
-                    belongTo={data?.data?.data.encodeId}
-                    encodeId={song.encodeId}
-                    duration={song.duration}
-                    hasLyric={song.hasLyric}
-                    releaseAt={song.releaseAt}
-                    title={song.title}
-                    thumbnail={song.thumbnail}
-                    thumbnailM={song.thumbnailM}
-                    artists={song.artists}
-                  />
-                ))}
-              </SwiperSlide>
-              {/* <SwiperSlide>Related</SwiperSlide> */}
-            </Swiper>
-          </div>
+                <SwiperSlide>
+                  {currentPlaylistReference.map((song, index) => (
+                    <SongHorizontalDisplay
+                      ref={currentSongId === song.encodeId ? ref : null}
+                      key={index}
+                      belongTo={data?.data?.data.encodeId}
+                      encodeId={song.encodeId}
+                      duration={song.duration}
+                      hasLyric={song.hasLyric}
+                      releaseAt={song.releaseAt}
+                      title={song.title}
+                      thumbnail={song.thumbnail}
+                      thumbnailM={song.thumbnailM}
+                      artists={song.artists}
+                    />
+                  ))}
+                </SwiperSlide>
+                {/* <SwiperSlide>Related</SwiperSlide> */}
+              </Swiper>
+            </div>
+          ) : (
+            <Loading className="pt-[50px]" />
+          )}
         </div>
       </div>
     </div>
