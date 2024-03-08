@@ -2,14 +2,11 @@ import { forwardRef, useEffect, useState } from "react";
 import { Slider } from "@mui/material";
 import { useAppSelector } from "../../../hooks/useAppSelector";
 import moment from "moment";
-import useMediaQuery from "@mui/material/useMediaQuery";
 
 export default forwardRef<HTMLAudioElement>(function SeekBar({}, ref) {
   const { currentTime } = useAppSelector((state) => state.currentTime);
   const { duration } = useAppSelector((state) => state.duration);
   const [percentPlayed, setPercentPlayed] = useState(0);
-
-  const matches = useMediaQuery("(max-width:600px)");
 
   useEffect(() => {
     setPercentPlayed((currentTime / duration) * 100);

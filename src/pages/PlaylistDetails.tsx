@@ -15,10 +15,10 @@ import { ResponseDataTypes } from "../types/ResponseDataTypes";
 import wave from "../assets/images/wave.gif";
 import { BiCurrentLocation } from "react-icons/bi";
 import { useInView } from "react-intersection-observer";
-import Loading from "../components/loading/loading";
 import PauseIcon from "../assets/icons/PauseIcon";
 import { setRandom } from "../features/random/randomSlice";
 import Tooltip from "@mui/material/Tooltip";
+import Loading from "../components/loading/Loading";
 
 export default function PlaylistDetails() {
   const [searchParams] = useSearchParams();
