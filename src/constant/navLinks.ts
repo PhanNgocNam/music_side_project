@@ -19,6 +19,6 @@ export const navLinks = [
     id: "#nav_3",
     link: "Liên hệ",
     icon: PiContactlessPayment,
-    to: "/#",
+    to: "https://portfolio-next-version-one.vercel.app/",
   },
 ];

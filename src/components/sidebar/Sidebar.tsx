@@ -32,7 +32,7 @@ export default function Sidebar() {
           ))}
         </ul>
       </div>
-      <div className="sm:hidden">username</div>
+      {/* <div className="sm:hidden">username</div> */}
     </div>
   );
 }
