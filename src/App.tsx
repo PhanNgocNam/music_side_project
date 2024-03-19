@@ -7,6 +7,7 @@ import PlaylistDetails from "./pages/PlaylistDetails";
 import Artists from "./pages/Artists";
 import Song from "./pages/Song";
 import { history } from "./constant/history";
+import Library from "./pages/Library";
 
 function App() {
   history.navigate = useNavigate();
@@ -20,7 +21,7 @@ function App() {
           <Route path="list" element={<PlaylistDetails />} />
           <Route path="artists" element={<Artists />} />
           <Route path="song" element={<Song />} />
-          <Route path="lib" element={<h1>lib</h1>} />
+          <Route path="lib" element={<Library />} />
         </Route>
       </Route>
     </Routes>

@@ -6,7 +6,7 @@ export default function Explore() {
       }}
       className=" bg-gray-500"
     >
-      Explore
+      sajdlksaj
     </div>
   );
 }

@@ -6,7 +6,15 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../../hooks/useAppSelector";
 
-export default React.forwardRef<HTMLAudioElement>(function Right({}, ref) {
+type RightTypes = {
+  isToggleLyrics: boolean;
+  setToggleLyrics: (isToggleLyrics: boolean) => void;
+};
+
+export default React.forwardRef<HTMLAudioElement, RightTypes>(function Right(
+  { setToggleLyrics, isToggleLyrics },
+  ref
+) {
   const navigate = useNavigate();
   const { current_playlist_id } = useAppSelector(
     (state) => state.currentPlaylistId
@@ -16,7 +24,10 @@ export default React.forwardRef<HTMLAudioElement>(function Right({}, ref) {
       onClick={() => navigate(`/list?id=${current_playlist_id}`)}
       className="min-w-60 w-[240px] flex flex-1 gap-1 items-center justify-end sm:hidden"
     >
-      <button className="text-[#BBBBBB]  border w-[32px] h-[32px] flex justify-center items-center border-white/20 rounded-sm hover:bg-white/20">
+      <button
+        className="text-[#BBBBBB]  border w-[32px] h-[32px] flex justify-center items-center border-white/20 rounded-sm hover:bg-white/20"
+        onClick={() => setToggleLyrics(!isToggleLyrics)}
+      >
         <GiMicrophone size={16} />
       </button>
       <MutedIcon width={1.5} height={1.5} classname="ml-4" />
@@ -40,7 +51,7 @@ export default React.forwardRef<HTMLAudioElement>(function Right({}, ref) {
             display: "none",
           },
         }}
-        defaultValue={50}
+        defaultValue={100}
         onChange={(e, value) => {
           e.stopPropagation();
           if (ref && "current" in ref && ref.current) {
